@@ -1,1855 +1,533 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="sea-green">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Spur - Desktop Pro Suite</title>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- PDF.js Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-
+    <title>English Spur Online English Training Academy | Real Spoken English Q & A</title>
     <style>
-        :root[data-theme="sea-green"] {
-            --primary: #065f46; --accent: #0d9488; --bg: #f8fafc; --toolbar-bg: #ffffff; --text: #0f172a; --border: #e2e8f0; --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        :root {
+            --primary: #047857;
+            --primary-dark: #065f46;
+            --secondary: #0d9488;
+            --bg-color: #f0fdf4;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --border-color: #d1fae5;
         }
-        :root[data-theme="warm-cream"] {
-            --primary: #78350f; --accent: #d97706; --bg: #fefae0; --toolbar-bg: #fffbeb; --text: #451a03; --border: #fde68a; --shadow: 0 4px 20px -2px rgba(120,53,15,0.05);
+        *, *::before, *::after {
+            box-sizing: border-box;
         }
-        :root[data-theme="slate-gray"] {
-            --primary: #1e293b; --accent: #475569; --bg: #f1f5f9; --toolbar-bg: #ffffff; --text: #0f172a; --border: #cbd5e1; --shadow: 0 4px 20px -2px rgba(30,41,59,0.05);
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
         }
-        :root[data-theme="soft-indigo"] {
-            --primary: #3730a3; --accent: #4f46e5; --bg: #eef2ff; --toolbar-bg: #ffffff; --text: #1e1b4b; --border: #c7d2fe; --shadow: 0 4px 20px -2px rgba(55,48,163,0.05);
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(4, 120, 87, 0.2);
+            border-bottom: 6px solid #022c22;
         }
-        :root[data-theme="rose-quartz"] {
-            --primary: #831843; --accent: #db2777; --bg: #fdf2f8; --toolbar-bg: #ffffff; --text: #500724; --border: #fbcfe8; --shadow: 0 4px 20px -2px rgba(131,24,67,0.05);
+        .logo-container img {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 15px;
+            background: white;
+            padding: 6px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
-
-        * {
-            box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif;
+        header h1 {
+            margin: 0 0 8px 0;
+            font-size: 26pt;
+            letter-spacing: 0.5px;
         }
-
-        html, body { height: 100%; background-color: var(--bg); transition: background 0.3s ease; }
-        body { display: flex; flex-direction: column; overflow-x: hidden; color: var(--text); }
-
-        /* প্রফেশনাল পাসওয়ার্ড লগইন স্ক্রিন */
-        .login-container {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.75);
-            display: flex; justify-content: center; align-items: center; z-index: 9999999; backdrop-filter: blur(10px);
+        header p {
+            margin: 0;
+            font-size: 11.5pt;
+            opacity: 0.95;
         }
-        .login-box {
-            background: #ffffff; padding: 40px; border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            text-align: center; width: 380px; display: flex; flex-direction: column; gap: 18px; border: 1px solid var(--border);
+        .contact-info {
+            margin-top: 15px;
+            font-size: 10.5pt;
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-weight: 500;
         }
-        .login-box h2 { color: #0f172a; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
-        .login-box p { color: #64748b; font-size: 13.5px; font-weight: 500; }
-        .login-box input { width: 100%; padding: 14px 16px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 15px; outline: none; transition: all 0.2s; background: #f8fafc; }
-        .login-box input:focus { border-color: var(--accent); background: #fff; box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1); }
-        .login-box button { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(6, 95, 70, 0.2); }
-        .login-box button:hover { transform: translateY(-1px); opacity: 0.95; }
-        .error-text { color: #ef4444; font-size: 13px; font-weight: 600; }
-
-        /* ডানদিকের কর্নারে ফিক্সড "Developed by Shovan Kapri" */
-        .top-right-developer-badge {
-            position: fixed; top: 10px; right: 20px; z-index: 999999; background: var(--toolbar-bg); padding: 8px 16px;
-            border: 1.5px solid var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center;
-            box-shadow: var(--shadow); font-size: 12px; font-weight: 800; color: var(--primary); letter-spacing: 0.3px;
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 15px;
         }
-        .top-right-developer-badge span { color: #f97316; margin-left: 4px; }
-
-        /* প্রফেশনাল ট্যাব বার */
-        .pdf-tab-bar {
-            background: var(--toolbar-bg); display: flex; align-items: center; padding: 6px 16px 0 16px;
-            border-bottom: 1px solid var(--border); gap: 6px; overflow-x: auto; position: sticky; top: 0; z-index: 100001; min-height: 36px;
+        .module-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(4, 120, 87, 0.08);
+            margin-bottom: 40px;
+            overflow: hidden;
+            border-top: 6px solid var(--primary);
+        }
+        .module-header {
+            background: #ecfdf5;
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .module-header h2 {
+            margin: 0;
+            font-size: 16pt;
+            color: var(--primary-dark);
+        }
+        .module-header p {
+            margin: 6px 0 0 0;
+            font-size: 10pt;
+            color: var(--text-muted);
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        table {
             width: 100%;
+            border-collapse: collapse;
+            text-align: left;
         }
-
-        .pdf-tab {
-            background: #f1f5f9; padding: 6px 12px; border-radius: 6px 6px 0 0; font-size: 11px; font-weight: 700;
-            color: #475569; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border);
-            border-bottom: none; max-width: 220px; min-width: 120px; transition: all 0.2s;
+        th, td {
+            padding: 14px 18px;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 10.5pt;
         }
-
-        .pdf-tab.active { background: var(--toolbar-bg); color: var(--primary); border-top: 3px solid var(--accent); box-shadow: 0 -3px 10px rgba(0,0,0,0.03); }
-        .pdf-tab span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-grow: 1; }
-        .pdf-tab .close-tab { font-size: 10px; padding: 3px; border-radius: 50%; flex-shrink: 0; transition: background 0.2s; }
-        .pdf-tab .close-tab:hover { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
-
-        /* অতি-কম্প্যাক্ট সিঙ্গেল-লাইন প্রফেশনাল টুলবার */
-        .acrobat-toolbar {
-            background: var(--toolbar-bg); padding: 8px 16px; box-shadow: var(--shadow);
-            display: flex; justify-content: flex-start; align-items: center; border-bottom: 2px solid var(--border);
-            gap: 10px; position: sticky; top: 36px; z-index: 100000; flex-wrap: nowrap; overflow-x: auto;
-            width: 100%; -webkit-overflow-scrolling: touch;
+        th {
+            background-color: #f0fdf4;
+            color: var(--primary-dark);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 9.5pt;
+            letter-spacing: 0.5px;
         }
-
-        .toolbar-section { display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; flex-shrink: 0; }
-        
-        .brand-mini { display: flex; align-items: center; gap: 6px; margin-right: 6px; flex-shrink: 0; }
-        .brand-mini img { height: 26px; width: auto; object-fit: contain; }
-        .brand-mini span { font-weight: 800; font-size: 13.5px; color: var(--primary); letter-spacing: -0.3px; }
-        .brand-mini span span { color: #f97316; }
-
-        .tool-btn {
-            background: var(--primary); color: white; border: none; padding: 5px 9px; border-radius: 6px;
-            font-size: 11px; cursor: pointer; font-weight: 700; transition: all 0.2s; display: inline-flex; align-items: center; gap: 4px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05); white-space: nowrap; flex-shrink: 0;
+        tr:hover {
+            background-color: #f8fafc;
         }
-        .tool-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-        .tool-btn.active { background: #f97316 !important; }
-        .tool-btn.secondary { background: #475569; }
-        .tool-btn.danger { background: #ef4444; }
-        .tool-btn.board-btn { background: #0d9488; }
-        .tool-btn.video-toggle-btn { background: #0284c7; }
-        .tool-btn.video-toggle-btn.active-video { background: #0369a1 !important; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
-        .tool-btn.google-btn { background: #4285F4; }
-        .tool-btn.util-btn { background: #8b5cf6; }
-
-        .shortcut-badge {
-            font-size: 9px; background: rgba(0, 0, 0, 0.25); color: #fff; padding: 1px 4px; border-radius: 3px; font-weight: 800; margin-left: 2px;
+        .q-num {
+            font-weight: bold;
+            color: var(--primary);
+            width: 70px;
+            text-align: center;
         }
-
-        .file-upload-btn {
-            background: var(--accent); color: white; padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; cursor: pointer;
-            display: inline-flex; align-items: center; gap: 4px; transition: 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); white-space: nowrap; flex-shrink: 0;
+        .q-text {
+            font-weight: 600;
+            color: var(--text-main);
+            width: 45%;
         }
-        .file-upload-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-        .file-upload-btn input { display: none; }
-
-        .toolbar-audio-widget {
-            display: flex; align-items: center; gap: 4px; background: #f1f5f9; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--border); flex-shrink: 0;
+        .a-text {
+            color: #374151;
+            font-style: italic;
         }
-        .toolbar-audio-widget select { font-size: 10.5px; font-weight: 700; padding: 2px 4px; border-radius: 6px; border: 1px solid var(--border); background: #fff; outline: none; max-width: 90px; }
-        .audio-ctrl-btn { background: var(--accent); color: white; border: none; width: 22px; height: 22px; border-radius: 4px; cursor: pointer; display: inline-flex; justify-content: center; align-items: center; font-size: 10px; transition: 0.2s; }
-        .audio-ctrl-btn:hover { opacity: 0.9; transform: scale(1.05); }
-
-        .fixed-color-btn {
-            width: 15px; height: 15px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; display: inline-block; transition: transform 0.15s;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        footer {
+            background: #022c22;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            font-size: 10.5pt;
+            border-top: 4px solid var(--secondary);
         }
-        .fixed-color-btn:hover { transform: scale(1.2); }
-        .fixed-color-btn.selected { border-color: #0f172a; transform: scale(1.3); box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.25); }
-
-        .color-picker-wrapper { display: flex; align-items: center; gap: 3px; font-size: 10px; font-weight: 700; color: var(--text); background: #f8fafc; padding: 3px 6px; border-radius: 6px; border: 1px solid var(--border); flex-shrink: 0; }
-        .size-select, .theme-selector { padding: 3px 6px; font-size: 11px; border-radius: 6px; border: 1px solid var(--border); font-weight: 700; background: var(--bg); color: var(--text); cursor: pointer; outline: none; transition: 0.2s; flex-shrink: 0; }
-        .size-select:focus, .theme-selector:focus { border-color: var(--accent); }
-
-        .page-jump-input {
-            width: 38px; padding: 3px; font-size: 11px; text-align: center; border: 1px solid var(--border); border-radius: 4px; font-weight: 700; background: var(--bg); color: var(--text); outline: none;
+        footer p {
+            margin: 6px 0;
         }
-
-        .page-indicator { font-size: 11px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 3px; flex-shrink: 0; }
-        .zoom-indicator-input { width: 50px; padding: 3px; font-size: 11px; font-weight: 700; text-align: center; color: var(--primary); background: #f1f5f9; border-radius: 6px; border: 1px solid var(--border); outline: none; flex-shrink: 0; }
-
-        /* মূল ফুল-স্ক্রিন ফ্লেক্স ওয়ার্কস্পেস এবং লেফট স্ক্রল ফিট */
-        .workspace { flex-grow: 1; width: 100%; display: flex; height: calc(100vh - 78px); overflow: hidden; position: relative; align-items: stretch; }
-        
-        .pdf-view-area {
-            flex: 1 1 auto; min-width: 0; padding: 40px;
-            overflow: auto;
-            display: flex; justify-content: flex-start;
-            align-items: flex-start;
-            background: #e2e8f0; height: 100%; position: relative;
-            cursor: grab;
-        }
-        .pdf-view-area:active { cursor: grabbing; }
-        
-        .canvas-container {
-            position: relative; display: inline-block; line-height: 0; background: #ffffff;
-            border-radius: 10px; box-shadow: 0 15px 30px -10px rgba(0,0,0,0.15); border-top: 5px solid var(--accent); overflow: hidden;
-            flex-shrink: 0; margin: 20px;
-            cursor: default;
-        }
-
-        #pdfCanvas { display: block; max-width: none; height: auto; }
-        #drawCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
-        #drawCanvas.active { pointer-events: auto; cursor: crosshair; touch-action: none; }
-        
-        .pdf-text-note {
-            position: absolute; background: rgba(255, 255, 255, 0.95); border: 1px dashed var(--accent); padding: 5px 8px;
-            font-size: 14px; font-weight: 700; color: #0f172a; outline: none; border-radius: 6px; z-index: 10;
-            min-width: 90px; height: 34px; overflow: hidden; white-space: nowrap; cursor: move; user-select: text;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08); transition: border-color 0.2s;
-        }
-        .pdf-text-note:hover, .pdf-text-note:focus { border-color: #f97316; background: #fff; }
-
-        /* Google In-App Layer Overlay */
-        .google-modal-layer {
-            position: fixed; top: 78px; left: 0; width: 100%; height: calc(100vh - 78px); background: rgba(15, 23, 42, 0.7);
-            display: none; justify-content: center; align-items: center; z-index: 99999; backdrop-filter: blur(4px); padding: 20px;
-        }
-        .google-modal-layer.active { display: flex; }
-        .google-modal-box {
-            background: #ffffff; width: 100%; height: 100%; border-radius: 12px; display: flex; flex-direction: column;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35); overflow: hidden; border: 2px solid #4285F4;
-        }
-        .google-modal-header {
-            display: flex; justify-content: space-between; align-items: center; background: #0f172a; color: white;
-            padding: 10px 18px; font-size: 14px; font-weight: 800;
-        }
-        .google-modal-close {
-            background: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 12px; cursor: pointer; transition: 0.2s;
-        }
-        .google-modal-close:hover { background: #dc2626; }
-        .google-modal-iframe {
-            flex-grow: 1; width: 100%; border: none; background: #ffffff;
-        }
-
-        /* ইউটিলিটি মডাল উইন্ডোজ */
-        .utility-modal-overlay {
-            position: fixed; top: 78px; left: 0; width: 100%; height: calc(100vh - 78px); background: rgba(15, 23, 42, 0.6);
-            display: none; justify-content: center; align-items: center; z-index: 999999; backdrop-filter: blur(4px); padding: 20px;
-        }
-        .utility-modal-overlay.active { display: flex; }
-        .utility-modal-box {
-            background: #ffffff; width: 440px; border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3); overflow: hidden; border: 1.5px solid var(--accent);
-            display: flex; flex-direction: column; animation: modalPop 0.2s ease;
-        }
-        @keyframes modalPop { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .utility-modal-header {
-            background: var(--primary); color: white; padding: 14px 18px; font-weight: 800; font-size: 14px; display: flex; justify-content: space-between; align-items: center;
-        }
-        .utility-modal-body { padding: 18px; display: flex; flex-direction: column; gap: 12px; background: #f8fafc; max-height: 500px; overflow-y: auto; }
-
-        /* ক্যালকুলেটর ডিজাইন */
-        .calc-screen { width: 100%; background: #0f172a; color: #38bdf8; font-size: 26px; font-weight: 800; text-align: right; padding: 14px; border-radius: 8px; border: none; margin-bottom: 4px; }
-        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-        .calc-btn { background: #ffffff; border: 1px solid var(--border); padding: 14px; font-weight: 700; font-size: 15px; border-radius: 8px; cursor: pointer; color: var(--text); transition: 0.15s; }
-        .calc-btn:hover { background: #f1f5f9; border-color: var(--accent); }
-        .calc-btn.operator { background: var(--accent); color: white; }
-
-        /* কারেন্সি কনভার্টার ও ওয়ার্ল্ড ক্লক ডিজাইন */
-        .util-input-group { display: flex; flex-direction: column; gap: 5px; font-size: 11.5px; font-weight: 700; color: #475569; }
-        .util-input-group input, .util-input-group select { padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--border); font-size: 13.5px; font-weight: 600; outline: none; background: #fff; }
-        
-        .clock-card { 
-            background: #ffffff; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border); 
-            display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        }
-        .clock-flag { font-size: 18px; margin-right: 6px; }
-        .clock-info { display: flex; flex-direction: column; gap: 2px; }
-        .clock-country { font-weight: 800; font-size: 13px; color: var(--text); }
-        .clock-date { font-weight: 600; font-size: 10.5px; color: #64748b; }
-        .clock-time { font-size: 13.5px; font-weight: 800; color: var(--primary); background: #f1f5f9; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border); letter-spacing: 0.5px; }
-
-        /* ভিজ্যুয়াল ফান ফ্যাক্টস কার্ড ডিজাইন */
-        .fact-card { 
-            background: #ffffff; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--border); 
-            border-left: 5px solid var(--accent); font-size: 13px; font-weight: 600; line-height: 1.5; color: #1e293b; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; gap: 12px; align-items: flex-start; transition: transform 0.2s;
-        }
-        .fact-card:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.06); }
-        .fact-icon { font-size: 18px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
-        .fact-content { display: flex; flex-direction: column; gap: 3px; }
-        .fact-title { font-weight: 800; font-size: 12.5px; color: var(--primary); text-transform: uppercase; letter-spacing: 0.3px; }
-
-        /* সাইড ভিডিও ও নোটপ্যাড প্যানেল */
-        .side-video-panel {
-            width: 0px; height: 100%; background: #ffffff; border-left: 1px solid var(--border);
-            display: none; flex-direction: column; flex-shrink: 0; transition: width 0.3s ease;
-            box-shadow: -5px 0 25px rgba(0,0,0,0.05); z-index: 10002;
-        }
-        .side-video-panel.active { width: 440px; display: flex !important; }
-        
-        .video-header-bar {
-            display: flex; justify-content: space-between; align-items: center; padding: 10px 14px;
-            background: linear-gradient(135deg, #0284c7, #0369a1); color: white; font-weight: 800; flex-shrink: 0;
-        }
-        .video-header-bar span { display: flex; align-items: center; gap: 8px; font-size: 12px; }
-
-        .video-scroll-content {
-            padding: 12px; overflow-y: auto; flex-grow: 1; display: flex; flex-direction: column; gap: 10px;
-        }
-
-        .media-card { background: #f8fafc; padding: 10px; border-radius: 8px; border: 1px solid var(--border); display: flex; flex-direction: column; height: 100%; }
-
-        .video-top-priority-section {
-            display: flex; flex-direction: column; flex-shrink: 0; order: 1;
-        }
-
-        .folder-picker-card {
-            text-align: center; background: #fff; padding: 8px; border-radius: 6px; border: 1px dashed var(--border);
-            display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; flex-shrink: 0; order: 2; margin-top: 8px;
-        }
-        .folder-btn { display: inline-block; background: #0284c7; color: white; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: 700; font-size: 10.5px; transition: 0.2s; }
-        .folder-btn:hover { opacity: 0.9; }
-        .status-text { width: 100%; font-size: 10px; color: #64748b; margin-top: 2px; font-weight: 600; }
-
-        #current-video-title { font-size: 11px; font-weight: 700; color: var(--text); margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: #fff; padding: 5px 8px; border-radius: 4px; border: 1px solid var(--border); flex-shrink: 0; }
-        video { width: 100%; min-height: 250px; background: #000; border-radius: 6px; margin-bottom: 4px; object-fit: contain; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-
-        .playlist-container { max-height: 150px; overflow-y: auto; border: 1px solid var(--border); border-radius: 6px; background: #fff; margin-top: 8px; flex-shrink: 0; order: 3; }
-        .playlist-item { padding: 6px 10px; border-bottom: 1px solid #f1f5f9; cursor: pointer; font-size: 10.5px; display: flex; justify-content: space-between; align-items: center; color: var(--text); font-weight: 500; }
-        .playlist-item:hover { background: #f1f5f9; }
-        .playlist-item.active { background: #0284c7; color: white; font-weight: 700; }
-        .playlist-item-actions { display: flex; align-items: center; gap: 6px; }
-        .playlist-delete-btn { background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 11px; padding: 2px 4px; border-radius: 4px; transition: 0.2s; }
-        .playlist-delete-btn:hover { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
-        .playlist-item.active .playlist-delete-btn { color: #f8fafc; }
-        .playlist-item.active .playlist-delete-btn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
-        .page-tag { font-size: 9px; opacity: 0.85; background: rgba(0,0,0,0.08); padding: 1px 4px; border-radius: 3px; }
-        .playlist-item.active .page-tag { background: rgba(255,255,255,0.2); }
-
-        /* কাস্টম কনফার্ম ডায়লগ মডাল */
-        .confirm-modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6);
-            display: none; justify-content: center; align-items: center; z-index: 999999999; backdrop-filter: blur(5px);
-        }
-        .confirm-modal-box {
-            background: #ffffff; padding: 25px; border-radius: 14px; width: 340px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            text-align: center; display: flex; flex-direction: column; gap: 14px; border: 1px solid var(--border);
-        }
-        .confirm-modal-box h3 { font-size: 16px; font-weight: 800; color: var(--primary); }
-        .confirm-modal-box p { font-size: 12.5px; color: #64748b; font-weight: 600; }
-        .confirm-btn-group { display: flex; gap: 10px; justify-content: center; margin-top: 6px; }
-        .c-btn { padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer; border: none; transition: 0.2s; }
-        .c-btn.cancel { background: #cbd5e1; color: #1e293b; }
-        .c-btn.confirm { background: var(--primary); color: white; }
-        .c-btn:hover { opacity: 0.9; transform: translateY(-1px); }
     </style>
 </head>
-<body oncontextmenu="return false;">
+<body>
 
-    <!-- কনফার্ম ডায়লগ মডাল -->
-    <div class="confirm-modal-overlay" id="confirmModalOverlay">
-        <div class="confirm-modal-box">
-            <h3 id="confirmTitle">নিশ্চিত করুন</h3>
-            <p id="confirmMessage">আপনি কি নতুন ফাইলগুলো যুক্ত করতে চান?</p>
-            <div class="confirm-btn-group">
-                <button class="c-btn cancel" onclick="closeConfirmModal(false)">বাতিল</button>
-                <button class="c-btn confirm" onclick="closeConfirmModal(true)">নিশ্চিত করুন</button>
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="English Spur Logo">
+        </div>
+        <h1>ENGLISH SPUR ONLINE ENGLISH TRAINING ACADEMY</h1>
+        <p>Master Spoken English Course Book • Real Q & A Repository</p>
+        <div class="contact-info">
+            📌 Kanaipur, Bantul, Bagnan, Howrah - 711312 &nbsp;|&nbsp; 📞 +91 9875340842
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- MODULE 1: PERSONAL IDENTITY & FAMILY (Q1 - Q50) -->
+        <div class="module-card">
+            <div class="module-header">
+                <h2>Module 1: Personal Identity & Family Background (Q1 - Q50)</h2>
+                <p>Real conversational questions regarding self-introduction, parents, siblings, and home life.</p>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th style="width:70px;">#</th><th>Question</th><th>Model Answer</th></tr></thead>
+                    <tbody>
+                        <tr><td class="q-num">Q1</td><td class="q-text">What is your full name?</td><td class="a-text">My full name is Souvik Roy.</td></tr>
+                        <tr><td class="q-num">Q2</td><td class="q-text">How old are you today?</td><td class="a-text">I am six years old.</td></tr>
+                        <tr><td class="q-num">Q3</td><td class="q-text">In which class do you study?</td><td class="a-text">I study in Class 1.</td></tr>
+                        <tr><td class="q-num">Q4</td><td class="q-text">What is the name of your school?</td><td class="a-text">The name of my school is Saraswati Vidyamandir.</td></tr>
+                        <tr><td class="q-num">Q5</td><td class="q-text">What is your father's name?</td><td class="a-text">My father's name is Mr. Anjan Roy.</td></tr>
+                        <tr><td class="q-num">Q6</td><td class="q-text">What does your father do?</td><td class="a-text">My father is a businessman.</td></tr>
+                        <tr><td class="q-num">Q7</td><td class="q-text">What is your mother's name?</td><td class="a-text">My mother's name is Mrs. Rina Roy.</td></tr>
+                        <tr><td class="q-num">Q8</td><td class="q-text">What does your mother do?</td><td class="a-text">My mother is a loving homemaker.</td></tr>
+                        <tr><td class="q-num">Q9</td><td class="q-text">Do you have any brothers or sisters?</td><td class="a-text">Yes, I have one younger sister.</td></tr>
+                        <tr><td class="q-num">Q10</td><td class="q-text">What is your sister's name?</td><td class="a-text">My sister's name is Priya Roy.</td></tr>
+                        <tr><td class="q-num">Q11</td><td class="q-text">Where do you live?</td><td class="a-text">I live in Bagnan, Howrah.</td></tr>
+                        <tr><td class="q-num">Q12</td><td class="q-text">What is your house address?</td><td class="a-text">I live near Kanaipur market.</td></tr>
+                        <tr><td class="q-num">Q13</td><td class="q-text">Who lives with you in your house?</td><td class="a-text">My parents, grandparents, and sister live with me.</td></tr>
+                        <tr><td class="q-num">Q14</td><td class="q-text">What is your grandfather's name?</td><td class="a-text">My grandfather's name is Mr. Bimal Roy.</td></tr>
+                        <tr><td class="q-num">Q15</td><td class="q-text">What is your grandmother's name?</td><td class="a-text">My grandmother's name is Mrs. Geeta Roy.</td></tr>
+                        <tr><td class="q-num">Q16</td><td class="q-text">When is your birthday?</td><td class="a-text">My birthday is on the 10th of May.</td></tr>
+                        <tr><td class="q-num">Q17</td><td class="q-text">What is your favorite color?</td><td class="a-text">My favorite color is sky blue.</td></tr>
+                        <tr><td class="q-num">Q18</td><td class="q-text">What is your favorite fruit?</td><td class="a-text">My favorite fruit is a sweet mango.</td></tr>
+                        <tr><td class="q-num">Q19</td><td class="q-text">What is your favorite vegetable?</td><td class="a-text">My favorite vegetable is potato.</td></tr>
+                        <tr><td class="q-num">Q20</td><td class="q-text">What do you like to eat for breakfast?</td><td class="a-text">I like to eat bread, butter, and milk.</td></tr>
+                        <tr><td class="q-num">Q21</td><td class="q-text">What is your favorite drink?</td><td class="a-text">My favorite drink is clean water and fresh fruit juice.</td></tr>
+                        <tr><td class="q-num">Q22</td><td class="q-text">Who is your best friend?</td><td class="a-text">My best friend is Rohan.</td></tr>
+                        <tr><td class="q-num">Q23</td><td class="q-text">What game do you play with Rohan?</td><td class="a-text">We play cricket and football together.</td></tr>
+                        <tr><td class="q-num">Q24</td><td class="q-text">What is your favorite toy?</td><td class="a-text">My favorite toy is a remote-control car.</td></tr>
+                        <tr><td class="q-num">Q25</td><td class="q-text">Do you have a pet at home?</td><td class="a-text">Yes, I have a cute pet dog named Tommy.</td></tr>
+                        <tr><td class="q-num">Q26</td><td class="q-text">What does Tommy like to eat?</td><td class="a-text">Tommy loves to eat biscuits and milk.</td></tr>
+                        <tr><td class="q-num">Q27</td><td class="q-text">What is your favorite subject?</td><td class="a-text">My favorite subject is English.</td></tr>
+                        <tr><td class="q-num">Q28</td><td class="q-text">Who is your class teacher?</td><td class="a-text">My class teacher is Ms. Sen.</td></tr>
+                        <tr><td class="q-num">Q29</td><td class="q-text">How do you go to school?</td><td class="a-text">I go to school by school van.</td></tr>
+                        <tr><td class="q-num">Q30</td><td class="q-text">At what time do you reach school?</td><td class="a-text">I reach school at 8:30 in the morning.</td></tr>
+                        <tr><td class="q-num">Q31</td><td class="q-text">What do you carry in your school bag?</td><td class="a-text">I carry books, notebooks, a pencil box, and a tiffin box.</td></tr>
+                        <tr><td class="q-num">Q32</td><td class="q-text">What is inside your pencil box?</td><td class="a-text">Pencils, an eraser, a sharpener, and a scale are inside.</td></tr>
+                        <tr><td class="q-num">Q33</td><td class="q-text">What do you bring for tiffin?</td><td class="a-text">I bring sandwiches and sliced apples for tiffin.</td></tr>
+                        <tr><td class="q-num">Q34</td><td class="q-text">Do you share your tiffin with friends?</td><td class="a-text">Yes, sharing food with friends makes me happy.</td></tr>
+                        <tr><td class="q-num">Q35</td><td class="q-text">What do you do during recess?</td><td class="a-text">I talk with friends and eat my tiffin during recess.</td></tr>
+                        <tr><td class="q-num">Q36</td><td class="q-text">What do you want to become when you grow up?</td><td class="a-text">I want to become a brave doctor.</td></tr>
+                        <tr><td class="q-num">Q37</td><td class="q-text">Why do you want to become a doctor?</td><td class="a-text">I want to treat sick people and help them.</td></tr>
+                        <tr><td class="q-num">Q38</td><td class="q-text">What is your favorite hobby?</td><td class="a-text">My favorite hobby is drawing colorful pictures.</td></tr>
+                        <tr><td class="q-num">Q39</td><td class="q-text">What do you like to draw?</td><td class="a-text">I like to draw scenery, trees, and cute animals.</td></tr>
+                        <tr><td class="q-num">Q40</td><td class="q-text">Do you like reading storybooks?</td><td class="a-text">Yes, I love reading illustrated fairy tales.</td></tr>
+                        <tr><td class="q-num">Q41</td><td class="q-text">Who tells you bedtime stories?</td><td class="a-text">My grandmother tells me wonderful stories every night.</td></tr>
+                        <tr><td class="q-num">Q42</td><td class="q-text">What is your favorite cartoon show?</td><td class="a-text">My favorite cartoon show is Doraemon.</td></tr>
+                        <tr><td class="q-num">Q43</td><td class="q-text">Do you watch cartoons all day?</td><td class="a-text">No, I watch cartoons only for a short time on weekends.</td></tr>
+                        <tr><td class="q-num">Q44</td><td class="q-text">How do you help your mother at home?</td><td class="a-text">I keep my toys and shoes in their proper places.</td></tr>
+                        <tr><td class="q-num">Q45</td><td class="q-text">Do you water the plants in your garden?</td><td class="a-text">Yes, I water the rose plants every afternoon.</td></tr>
+                        <tr><td class="q-num">Q46</td><td class="q-text">What flowers grow in your garden?</td><td class="a-text">Roses, marigolds, and sunflowers grow in our garden.</td></tr>
+                        <tr><td class="q-num">Q47</td><td class="q-text">Are you afraid of the dark?</td><td class="a-text">No, I am a brave boy and not afraid of the dark.</td></tr>
+                        <tr><td class="q-num">Q48</td><td class="q-text">Do you keep your room neat and clean?</td><td class="a-text">Yes, I always keep my bedroom clean and tidy.</td></tr>
+                        <tr><td class="q-num">Q49</td><td class="q-text">Are you polite to everyone?</td><td class="a-text">Yes, I speak politely with elders and friends.</td></tr>
+                        <tr><td class="q-num">Q50</td><td class="q-text">Are you happy studying at English Spur Academy?</td><td class="a-text">Yes, I am very happy and excited to learn English here!</td></tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+
+        <!-- MODULE 2: DAILY ROUTINE & HABITS (Q51 - Q100) -->
+        <div class="module-card">
+            <div class="module-header">
+                <h2>Module 2: Daily Routine & Hygiene Habits (Q51 - Q100)</h2>
+                <p>Real questions regarding morning schedules, dental hygiene, study hours, and bedtime habits.</p>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th style="width:70px;">#</th><th>Question</th><th>Model Answer</th></tr></thead>
+                    <tbody>
+                        <tr><td class="q-num">Q51</td><td class="q-text">At what time do you wake up in the morning?</td><td class="a-text">I wake up early in the morning at 6 o'clock.</td></tr>
+                        <tr><td class="q-num">Q52</td><td class="q-text">What is the first thing you say after waking up?</td><td class="a-text">I greet my parents saying, "Good morning, Mother and Father."</td></tr>
+                        <tr><td class="q-num">Q53</td><td class="q-text">Do you brush your teeth every day?</td><td class="a-text">Yes, I brush my teeth twice a day, morning and night.</td></tr>
+                        <tr><td class="q-num">Q54</td><td class="q-text">Do you take a bath daily?</td><td class="a-text">Yes, I take a fresh bath every day with soap and water.</td></tr>
+                        <tr><td class="q-num">Q55</td><td class="q-text">Why is taking a bath important?</td><td class="a-text">It keeps our body clean and free from germs.</td></tr>
+                        <tr><td class="q-num">Q56</td><td class="q-text">What do you wear after bathing?</td><td class="a-text">I wear clean and ironed clothes.</td></tr>
+                        <tr><td class="q-num">Q57</td><td class="q-text">How do you comb your hair?</td><td class="a-text">I comb my hair neatly using a clean plastic comb.</td></tr>
+                        <tr><td class="q-num">Q58</td><td class="q-text">Do you trim your fingernails regularly?</td><td class="a-text">Yes, my mother trims my fingernails every Sunday.</td></tr>
+                        <tr><td class="q-num">Q59</td><td class="q-text">Do you wash your hands before eating meals?</td><td class="a-text">Yes, I always wash my hands thoroughly with soap before eating.</td></tr>
+                        <tr><td class="q-num">Q60</td><td class="q-text">What do you do after finishing your meals?</td><td class="a-text">I rinse my mouth with clean water and wipe my hands.</td></tr>
+                        <tr><td class="q-num">Q61</td><td class="q-text">At what time do you eat breakfast?</td><td class="a-text">I eat my healthy breakfast at 7:30 AM.</td></tr>
+                        <tr><td class="q-num">Q62</td><td class="q-text">Do you drink milk daily?</td><td class="a-text">Yes, I drink a glass of warm milk every single day.</td></tr>
+                        <tr><td class="q-num">Q63</td><td class="q-text">When do you leave for school?</td><td class="a-text">I leave for school at 8:15 AM.</td></tr>
+                        <tr><td class="q-num">Q64</td><td class="q-text">What do you say when leaving home for school?</td><td class="a-text">I say, "Goodbye, Mother! See you in the afternoon."</td></tr>
+                        <tr><td class="q-num">Q65</td><td class="q-text">When do you return home from school?</td><td class="a-text">I return home from school at 2:00 PM.</td></tr>
+                        <tr><td class="q-num">Q66</td><td class="q-text">What do you do immediately after coming home?</td><td class="a-text">I wash my hands and face, change my uniform, and rest.</td></tr>
+                        <tr><td class="q-num">Q67</td><td class="q-text">At what time do you eat lunch?</td><td class="a-text">I eat my lunch with family at 2:30 PM.</td></tr>
+                        <tr><td class="q-num">Q68</td><td class="q-text">What do you have for lunch?</td><td class="a-text">I eat rice, dal, fish curry, and fresh vegetables.</td></tr>
+                        <tr><td class="q-num">Q69</td><td class="q-text">Do you take a nap in the afternoon?</td><td class="a-text">Yes, I sleep for an hour in the afternoon.</td></tr>
+                        <tr><td class="q-num">Q70</td><td class="q-text">When do you start your evening studies?</td><td class="a-text">I sit down to study with my tutor at 5:30 PM.</td></tr>
+                        <tr><td class="q-num">Q71</td><td class="q-text">Do you complete your school homework on time?</td><td class="a-text">Yes, I complete my homework every evening without delay.</td></tr>
+                        <tr><td class="q-num">Q72</td><td class="q-text">What do you do after finishing homework?</td><td class="a-text">I pack my school bag for the next day.</td></tr>
+                        <tr><td class="q-num">Q73</td><td class="q-text">When do you go out to play?</td><td class="a-text">I go out to play in the neighborhood park at 4:30 PM.</td></tr>
+                        <tr><td class="q-num">Q74</td><td class="q-text">What games do you play outdoors?</td><td class="a-text">I play running, hide and seek, and badminton.</td></tr>
+                        <tr><td class="q-num">Q75</td><td class="q-text">Do you wash your hands and feet after playing?</td><td class="a-text">Yes, I always clean up immediately after returning from play.</td></tr>
+                        <tr><td class="q-num">Q76</td><td class="q-text">At what time do you eat dinner?</td><td class="a-text">I eat dinner with my family at 8:30 PM.</td></tr>
+                        <tr><td class="q-num">Q77</td><td class="q-text">What do you have for dinner?</td><td class="a-text">I eat roti, vegetable curry, and sometimes warm milk.</td></tr>
+                        <tr><td class="q-num">Q78</td><td class="q-text">What do you do after dinner?</td><td class="a-text">I spend some quiet time talking with my parents.</td></tr>
+                        <tr><td class="q-num">Q79</td><td class="q-text">Do you brush your teeth before sleeping?</td><td class="a-text">Yes, I brush my teeth lightly before going to bed.</td></tr>
+                        <tr><td class="q-num">Q80</td><td class="q-text">What do you say to your parents before sleeping?</td><td class="a-text">I say, "Good night, sweet dreams!"</td></tr>
+                        <tr><td class="q-num">Q81</td><td class="q-text">At what time do you go to sleep?</td><td class="a-text">I go to sleep peacefully at 9:30 PM.</td></tr>
+                        <tr><td class="q-num">Q82</td><td class="q-text">How many hours do children need to sleep?</td><td class="a-text">Children need at least 8 to 9 hours of deep sleep.</td></tr>
+                        <tr><td class="q-num">Q83</td><td class="q-text">Do you keep your shoes neatly on the rack?</td><td class="a-text">Yes, I always keep my shoes on the shoe rack.</td></tr>
+                        <tr><td class="q-num">Q84</td><td class="q-text">Do you fold your blanket after waking up?</td><td class="a-text">Yes, I try to fold my bed sheet and blanket neatly.</td></tr>
+                        <tr><td class="q-num">Q85</td><td class="q-text">Do you waste drinking water?</td><td class="a-text">No, I never waste water and always close the tap tightly.</td></tr>
+                        <tr><td class="q-num">Q86</td><td class="q-text">Where do you throw waste paper or trash?</td><td class="a-text">I always throw trash into the covered dustbin.</td></tr>
+                        <tr><td class="q-num">Q87</td><td class="q-text">Do you switch off lights when leaving a room?</td><td class="a-text">Yes, I save electricity by turning off unused lights and fans.</td></tr>
+                        <tr><td class="q-num">Q88</td><td class="q-text">Are you punctual for your classes?</td><td class="a-text">Yes, I believe in being punctual and reaching everywhere on time.</td></tr>
+                        <tr><td class="q-num">Q89</td><td class="q-text">Do you help set the dining table?</td><td class="a-text">Yes, I help my mother place spoons and plates on the table.</td></tr>
+                        <tr><td class="q-num">Q90</td><td class="q-text">Do you clean your study desk daily?</td><td class="a-text">Yes, I keep my books, pencils, and colors arranged properly.</td></tr>
+                        <tr><td class="q-num">Q91</td><td class="q-text">Do you exercise in the morning?</td><td class="a-text">Yes, I do light stretching exercises with my father.</td></tr>
+                        <tr><td class="q-num">Q92</td><td class="q-text">Why is physical exercise good for us?</td><td class="a-text">It keeps our muscles strong and our mind active.</td></tr>
+                        <tr><td class="q-num">Q93</td><td class="q-text">Do you wash fruits before eating them?</td><td class="a-text">Yes, I always wash fruits thoroughly with clean water.</td></tr>
+                        <tr><td class="q-num">Q94</td><td class="q-text">Do you eat junk food every day?</td><td class="a-text">No, junk food is unhealthy, so I eat it only occasionally.</td></tr>
+                        <tr><td class="q-num">Q95</td><td class="q-text">Do you drink enough water throughout the day?</td><td class="a-text">Yes, I drink plenty of water to keep myself hydrated.</td></tr>
+                        <tr><td class="q-num">Q96</td><td class="q-text">Do you cover your mouth while coughing or sneezing?</td><td class="a-text">Yes, I always use a clean handkerchief when coughing or sneezing.</td></tr>
+                        <tr><td class="q-num">Q97</td><td class="q-text">Do you walk on the footpath while walking on roads?</td><td class="a-text">Yes, I always walk safely on the footpath.</td></tr>
+                        <tr><td class="q-num">Q98</td><td class="q-text">Are you polite to domestic animals?</td><td class="a-text">Yes, I love animals and never hurt or tease them.</td></tr>
+                        <tr><td class="q-num">Q99</td><td class="q-text">Do you respect your daily routine?</td><td class="a-text">Yes, following a disciplined daily routine makes me successful.</td></tr>
+                        <tr><td class="q-num">Q100</td><td class="q-text">Are you proud of your healthy lifestyle habits?</td><td class="a-text">Yes, I am very proud of my clean and healthy habits!</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- MODULE 3: SOCIAL ETIQUETTE & MANNERS (Q101 - Q150) -->
+        <div class="module-card">
+            <div class="module-header">
+                <h2>Module 3: Social Etiquette & Magic Words (Q101 - Q150)</h2>
+                <p>Practical real-life phrases covering polite requests, apologies, gratitude, and greetings.</p>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th style="width:70px;">#</th><th>Question</th><th>Model Answer</th></tr></thead>
+                    <tbody>
+                        <tr><td class="q-num">Q101</td><td class="q-text">What do you say when someone gives you a gift?</td><td class="a-text">I say, "Thank you very much for this wonderful gift."</td></tr>
+                        <tr><td class="q-num">Q102</td><td class="q-text">What do you say when someone helps you?</td><td class="a-text">I say, "Thank you for your kind help."</td></tr>
+                        <tr><td class="q-num">Q103</td><td class="q-text">What is the reply when someone says thank you to you?</td><td class="a-text">I reply, "You are most welcome."</td></tr>
+                        <tr><td class="q-num">Q104</td><td class="q-text">What do you say when you make a mistake?</td><td class="a-text">I immediately say, "I am very sorry for my mistake."</td></tr>
+                        <tr><td class="q-num">Q105</td><td class="q-text">What word do you use when asking for something politely?</td><td class="a-text">I use the magic word "Please".</td></tr>
+                        <tr><td class="q-num">Q106</td><td class="q-text">How do you ask for a glass of water politely?</td><td class="a-text">I say, "Please give me a glass of water."</td></tr>
+                        <tr><td class="q-num">Q107</td><td class="q-text">What do you say when you want to pass by someone?</td><td class="a-text">I say, "Excuse me, please."</td></tr>
+                        <tr><td class="q-num">Q108</td><td class="q-text">What do you say when you interrupt someone speaking?</td><td class="a-text">I say, "Excuse me for interrupting."</td></tr>
+                        <tr><td class="q-num">Q109</td><td class="q-text">What do you say when meeting someone in the morning?</td><td class="a-text">I say, "Good morning, Sir / Ma'am."</td></tr>
+                        <tr><td class="q-num">Q110</td><td class="q-text">What do you say when meeting someone in the afternoon?</td><td class="a-text">I say, "Good afternoon."</td></tr>
+                        <tr><td class="q-num">Q111</td><td class="q-text">What do you say when meeting someone in the evening?</td><td class="a-text">I say, "Good evening."</td></tr>
+                        <tr><td class="q-num">Q112</td><td class="q-text">What do you say when parting ways at night?</td><td class="a-text">I say, "Good night! Have a peaceful sleep."</td></tr>
+                        <tr><td class="q-num">Q113</td><td class="q-text">What do you say when answering a telephone call?</td><td class="a-text">I say, "Hello, good day! Who is speaking please?"</td></tr>
+                        <tr><td class="q-num">Q114</td><td class="q-text">How do you invite a friend to your birthday party?</td><td class="a-text">I say, "Please come to my birthday party on Sunday."</td></tr>
+                        <tr><td class="q-num">Q115</td><td class="q-text">What do you say when someone sneezes?</td><td class="a-text">I politely say, "Bless you!"</td></tr>
+                        <tr><td class="q-num">Q116</td><td class="q-text">What do you say if you yawn in public?</td><td class="a-text">I cover my mouth and say, "Excuse me."</td></tr>
+                        <tr><td class="q-num">Q117</td><td class="q-text">How do you ask permission to enter the classroom?</td><td class="a-text">I ask, "May I come in, Ma'am?"</td></tr>
+                        <tr><td class="q-num">Q118</td><td class="q-text">How do you ask permission to go to the washroom?</td><td class="a-text">I ask, "May I go to the washroom, please?"</td></tr>
+                        <tr><td class="q-num">Q119</td><td class="q-text">How do you ask permission to drink water during class?</td><td class="a-text">I ask, "May I drink water from my bottle, Sir?"</td></tr>
+                        <tr><td class="q-num">Q120</td><td class="q-text">What do you say when someone wishes you on your birthday?</td><td class="a-text">I say, "Thank you so much for your lovely wishes!"</td></tr>
+                        <tr><td class="q-num">Q121</td><td class="q-text">Do you stand up when elders enter the room?</td><td class="a-text">Yes, standing up to greet elders shows good manners.</td></tr>
+                        <tr><td class="q-num">Q122</td><td class="q-text">Do you share your toys with visiting friends?</td><td class="a-text">Yes, sharing toys is a sign of true friendship and care.</td></tr>
+                        <tr><td class="q-num">Q123</td><td class="q-text">Do you listen carefully when someone is speaking?</td><td class="a-text">Yes, I practice active listening without interrupting.</td></tr>
+                        <tr><td class="q-num">Q124</td><td class="q-text">Do you knock on a closed door before entering?</td><td class="a-text">Yes, I always knock politely and wait for permission.</td></tr>
+                        <tr><td class="q-num">Q125</td><td class="q-text">Do you speak softly and politely in public places?</td><td class="a-text">Yes, I avoid shouting and speak in a calm, gentle voice.</td></tr>
+                        <tr><td class="q-num">Q126</td><td class="q-text">What do you say when offering something to someone?</td><td class="a-text">I say, "Please take this."</td></tr>
+                        <tr><td class="q-num">Q127</td><td class="q-text">How do you greet guests arriving at your home?</td><td class="a-text">I say, "Welcome to our home! Please come in and sit down."</td></tr>
+                        <tr><td class="q-num">Q128</td><td class="q-text">Do you offer water to guests?</td><td class="a-text">Yes, I politely offer a glass of water to our guests.</td></tr>
+                        <tr><td class="q-num">Q129</td><td class="q-text">What do you say when guests are leaving?</td><td class="a-text">I say, "Goodbye! Please visit us again soon."</td></tr>
+                        <tr><td class="q-num">Q130</td><td class="q-text">Do you respect your teachers?</td><td class="a-text">Yes, I respect all my teachers deeply and obey their guidance.</td></tr>
+                        <tr><td class="q-num">Q131</td><td class="q-text">Do you fight with your classmates?</td><td class="a-text">No, I never fight and always try to live peacefully with everyone.</td></tr>
+                        <tr><td class="q-num">Q132</td><td class="q-text">What do you do if you accidentally hurt someone?</td><td class="a-text">I immediately apologize and ask if they are okay.</td></tr>
+                        <tr><td class="q-num">Q133</td><td class="q-text">Do you keep promises you make to friends?</td><td class="a-text">Yes, keeping promises makes people trust and respect me.</td></tr>
+                        <tr><td class="q-num">Q134</td><td class="q-text">Do you speak the truth always?</td><td class="a-text">Yes, I am an honest child and always speak the truth.</td></tr>
+                        <tr><td class="q-num">Q135</td><td class="q-text">Do you help younger children in need?</td><td class="a-text">Yes, I love helping younger kids whenever they need assistance.</td></tr>
+                        <tr><td class="q-num">Q136</td><td class="q-text">Do you respect public property and books?</td><td class="a-text">Yes, I never tear books or damage public property.</td></tr>
+                        <tr><td class="q-num">Q137</td><td class="q-text">Do you stand in a queue while buying tickets or boarding?</td><td class="a-text">Yes, I always maintain discipline and stand in a queue.</td></tr>
+                        <tr><td class="q-num">Q138</td><td class="q-text">Do you greet security guards and helpers?</td><td class="a-text">Yes, I greet everyone with a warm smile and polite words.</td></tr>
+                        <tr><td class="q-num">Q139</td><td class="q-text">Are you polite during meal times with family?</td><td class="a-text">Yes, I chew with my mouth closed and speak only after swallowing.</td></tr>
+                        <tr><td class="q-num">Q140</td><td class="q-text">Do you ask before borrowing someone's belongings?</td><td class="a-text">Yes, I always ask for permission before using anyone's item.</td></tr>
+                        <tr><td class="q-num">Q141</td><td class="q-text">Do you return borrowed things promptly?</td><td class="a-text">Yes, I return borrowed items safely and say thank you.</td></tr>
+                        <tr><td class="q-num">Q142</td><td class="q-text">Are you thankful for the food you eat?</td><td class="a-text">Yes, I am always grateful for the delicious meals we receive.</td></tr>
+                        <tr><td class="q-num">Q143</td><td class="q-text">Do you laugh at others when they make mistakes?</td><td class="a-text">No, I never mock anyone and always encourage them.</td></tr>
+                        <tr><td class="q-num">Q144</td><td class="q-text">Do you congratulate friends on their success?</td><td class="a-text">Yes, I feel genuinely happy for my friends' achievements.</td></tr>
+                        <tr><td class="q-num">Q145</td><td class="q-text">Do you maintain table manners?</td><td class="a-text">Yes, I use a napkin and eat neatly without spilling food.</td></tr>
+                        <tr><td class="q-num">Q146</td><td class="q-text">Are you kind to stray animals?</td><td class="a-text">Yes, I feed stray dogs and cats with biscuits and milk.</td></tr>
+                        <tr><td class="q-num">Q147</td><td class="q-text">Do you use polite words with bus drivers and conductors?</td><td class="a-text">Yes, I always greet them and say thank you when getting down.</td></tr>
+                        <tr><td class="q-num">Q148</td><td class="q-text">Do you say thank you to your mother for cooking?</td><td class="a-text">Yes, I always tell my mother how tasty the food is.</td></tr>
+                        <tr><td class="q-num">Q149</td><td class="q-text">Do good manners make a person popular?</td><td class="a-text">Yes, polite behavior wins everyone's heart and respect.</td></tr>
+                        <tr><td class="q-num">Q150</td><td class="q-text">Are you committed to practicing good etiquette daily?</td><td class="a-text">Yes, good manners are part of my daily character!</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- MODULE 4: NATURE, ANIMALS & ENVIRONMENT (Q151 - Q200) -->
+        <div class="module-card">
+            <div class="module-header">
+                <h2>Module 4: Animals, Birds, Plants & Environment (Q151 - Q200)</h2>
+                <p>Real questions exploring wildlife, domestic creatures, seasons, and ecological awareness.</p>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th style="width:70px;">#</th><th>Question</th><th>Model Answer</th></tr></thead>
+                    <tbody>
+                        <tr><td class="q-num">Q151</td><td class="q-text">Which animal is known as the king of the jungle?</td><td class="a-text">The lion is known as the king of the jungle.</td></tr>
+                        <tr><td class="q-num">Q152</td><td class="q-text">Which animal gives us sweet milk?</td><td class="a-text">The cow and goat give us milk.</td></tr>
+                        <tr><td class="q-num">Q153</td><td class="q-text">Which animal guards our house at night?</td><td class="a-text">A loyal dog guards our house.</td></tr>
+                        <tr><td class="q-num">Q154</td><td class="q-text">Which animal is called the ship of the desert?</td><td class="a-text">The camel is called the ship of the desert.</td></tr>
+                        <tr><td class="q-num">Q155</td><td class="q-text">Which animal jumps on trees and loves bananas?</td><td class="a-text">A playful monkey jumps on trees.</td></tr>
+                        <tr><td class="q-num">Q156</td><td class="q-text">Which animal has a very long neck?</td><td class="a-text">The giraffe has a very long neck.</td></tr>
+                        <tr><td class="q-num">Q157</td><td class="q-text.">Which is the tallest animal on land?</td><td class="a-text">The giraffe is the tallest land animal.</td></tr>
+                        <tr><td class="q-num">Q158</td><td class="q-text">Which animal has black and white stripes on its body?</td><td class="a-text">The zebra has striking black and white stripes.</td></tr>
+                        <tr><td class="q-num">Q159</td><td class="q-text">Which animal is known for its immense speed and spots?</td><td class="a-text">The cheetah is the fastest running land animal.</td></tr>
+                        <tr><td class="q-num">Q160</td><td class="q-text">Which massive animal has a trunk and large ears?</td><td class="a-text">The elephant is a massive animal with a long trunk.</td></tr>
+                        <tr><td class="q-num">Q161</td><td class="q-text">Which bird is our national bird?</td><td class="a-text">The beautiful peacock is our national bird.</td></tr>
+                        <tr><td class="q-num">Q162</td><td class="q-text">Which bird can talk and mimic human voices?</td><td class="a-text">A colorful parrot can mimic human speech.</td></tr>
+                        <tr><td class="q-num">Q163</td><td class="q-text">Which bird cannot fly but runs very fast?</td><td class="a-text">The ostrich is a large bird that cannot fly.</td></tr>
+                        <tr><td class="q-num">Q164</td><td class="q-text">Which bird builds a hanging nest on trees?</td><td class="a-text">The weaver bird builds an artistic hanging nest.</td></tr>
+                        <tr><td class="q-num">Q165</td><td class="q-text">Which small bird is known for its sweet morning chirp?</td><td class="a-text">The sparrow is a lovely little chirping bird.</td></tr>
+                        <tr><td class="q-num">Q166</td><td class="q-text">Which bird swims gracefully on water ponds?</td><td class="a-text">The white swan and duck swim gracefully.</td></tr>
+                        <tr><td class="q-num">Q167</td><td class="q-text">Which bird is a symbol of peace?</td><td class="a-text">The white dove is a universal symbol of peace.</td></tr>
+                        <tr><td class="q-num">Q168</td><td class="q-text">Which bird flies actively during the night?</td><td class="a-text">The wise owl is active during the night.</td></tr>
+                        <tr><td class="q-num">Q169</td><td class="q-text">What color are healthy growing tree leaves?</td><td class="a-text">Healthy tree leaves are vibrant green in color.</td></tr>
+                        <tr><td class="q-num">Q170</td><td class="q-text">What do trees give us to breathe?</td><td class="a-text">Trees give us life-supporting oxygen gas.</td></tr>
+                        <tr><td class="q-num">Q171</td><td class="q-text">Why are plants and trees important for our earth?</td><td class="a-text">They provide fresh air, shade, food, and rain.</td></tr>
+                        <tr><td class="q-num">Q172</td><td class="q-text">What do we get from fruit-bearing trees?</td><td class="a-text">We get juicy and nutritious fruits to eat.</td></tr>
+                        <tr><td class="q-num">Q173</td><td class="q-text">What do bees collect from flowers?</td><td class="a-text">Honeybees collect sweet nectar from colorful flowers.</td></tr>
+                        <tr><td class="q-num">Q174</td><td class="q-text">What insects make buzzing sounds and silk?</td><td class="a-text">Silkworms give us silk thread, and bees make honey.</td></tr>
+                        <tr><td class="q-num">Q175</td><td class="q-text">How many seasons do we experience in India?</td><td class="a-text">We mainly experience summer, monsoon, autumn, and winter.</td></tr>
+                        <tr><td class="q-num">Q176</td><td class="q-text">Which season is very hot and sunny?</td><td class="a-text">Summer season is very hot and sunny.</td></tr>
+                        <tr><td class="q-num">Q177</td><td class="q-text">What do we use during the rainy monsoon season?</td><td class="a-text">We use umbrellas and colorful raincoats when it rains.</td></tr>
+                        <tr><td class="q-num">Q178</td><td class="q-text">Which season brings cold chilly winds?</td><td class="a-text">Winter season brings cold weather and fog.</td></tr>
+                        <tr><td class="q-num">Q179</td><td class="q-text">What clothes do we wear in winter?</td><td class="a-text">We wear warm woolen sweaters, jackets, and caps.</td></tr>
+                        <tr><td class="q-num">Q180</td><td class="q-text">What lights up the sky during daytime?</td><td class="a-text">The bright golden Sun lights up the sky during the day.</td></tr>
+                        <tr><td class="q-num">Q181</td><td class="q-text">What shines alongside twinkling stars at night?</td><td class="a-text">The silver Moon shines brightly with stars at night.</td></tr>
+                        <tr><td class="q-num">Q182</td><td class="q-text">What is a rainbow composed of?</td><td class="a-text">A rainbow consists of seven beautiful colors.</td></tr>
+                        <tr><td class="q-num">Q183</td><td class="q-text">What falls from clouds during rain?</td><td class="a-text">Raindrops fall from dark clouds during monsoon.</td></tr>
+                        <tr><td class="q-num">Q184</td><td class="q-text">Where does river water flow towards?</td><td class="a-text">River water flows steadily towards the deep sea.</td></tr>
+                        <tr><td class="q-num">Q185</td><td class="q-text">What is the color of clear open sky?</td><td class="a-text">A clear open sky is bright blue.</td></tr>
+                        <tr><td class="q-num">Q186</td><td class="q-text">Why should we protect our environment?</td><td class="a-text">Protecting our environment keeps our planet clean and safe.</td></tr>
+                        <tr><td class="q-num">Q187</td><td class="q-text">How can we plant more trees?</td><td class="a-text">We can plant saplings in gardens and school grounds.</td></tr>
+                        <tr><td class="q-num">Q188</td><td class="q-text">Is plastic safe for our earth?</td><td class="a-text">No, plastic harms nature, so we should use cloth bags.</td></tr>
+                        <tr><td class="q-num">Q189</td><td class="q-text">What animals live both in water and on land?</td><td class="a-text">Frogs and crocodiles live both on land and in water.</td></tr>
+                        <tr><td class="q-num">Q190</td><td class="q-text">Which aquatic animal is known as the largest?</td><td class="a-text">The blue whale is the largest animal living in oceans.</td></tr>
+                        <tr><td class="q-num">Q191</td><td class="q-text">Which intelligent sea creature loves playing with humans?</td><td class="a-text">The dolphin is a smart and friendly sea creature.</td></tr>
+                        <tr><td class="q-num">Q192</td><td class="q-text">What do fish use to breathe underwater?</td><td class="a-text">Fish use their gills to breathe dissolved oxygen in water.</td></tr>
+                        <tr><td class="q-num">Q193</td><td class="q-text">Which tiny insect works hard all day collecting food?</td><td class="a-text">The tiny ant is a hardworking insect.</td></tr>
+                        <tr><td class="q-num">Q194</td><td class="q-text">Which insect has colorful wings and drinks flower nectar?</td><td class="a-text">The butterfly has beautiful colorful wings.</td></tr>
+                        <tr><td class="q-num">Q195</td><td class="q-text">What sound does a cat make?</td><td class="a-text">A cat makes a soft meow sound.</td></tr>
+                        <tr><td class="q-num">Q196</td><td class="q-text">What sound does a fierce lion make?</td><td class="a-text">A lion makes a loud roaring sound.</td></tr>
+                        <tr><td class="q-num">Q197</td><td class="q-text">What sound does a horse make?</td><td class="a-text">A horse makes a neighing sound.</td></tr>
+                        <tr><td class="q-num">Q198</td><td class="q-text">What sound does a tiny duck make?</td><td class="a-text">A duck makes a quacking sound.</td></tr>
+                        <tr><td class="q-num">Q199</td><td class="q-text">Do you love observing nature around you?</td><td class="a-text">Yes, exploring plants and animals fills my heart with joy.</td></tr>
+                        <tr><td class="q-num">Q200</td><td class="q-text">Are you dedicated to keeping nature clean and green?</td><td class="a-text">Yes, I promise to protect trees and care for animals!</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- MODULE 5: SCHOOL LIFE & ACADEMICS (Q201 - Q250) -->
+        <div class="module-card">
+            <div class="module-header">
+                <h2>Module 5: Classroom Objects & School Life (Q201 - Q250)</h2>
+                <p>Real academic conversations about stationary, school rules, classroom objects, and peer cooperation.</p>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th style="width:70px;">#</th><th>Question</th><th>Model Answer</th></tr></thead>
+                    <tbody>
+                        <tr><td class="q-num">Q201</td><td class="q-text">What do you use to write in your notebook?</td><td class="a-text">I use a sharp pencil to write in my notebook.</td></tr>
+                        <tr><td class="q-num">Q202</td><td class="q-text">What do you use to erase pencil mistakes?</td><td class="a-text">I use a clean rubber eraser to correct mistakes.</td></tr>
+                        <tr><td class="q-num">Q203</td><td class="q-text">What do you use to make your pencil sharp?</td><td class="a-text">I use a small pencil sharpener.</td></tr>
+                        <tr><td class="q-num">Q204</td><td class="q-text">What do you use to draw straight lines?</td><td class="a-text">I use a plastic ruler or scale.</td></tr>
+                        <tr><td class="q-num">Q205</td><td class="q-text">What do you color your drawings with?</td><td class="a-text">I color my drawings with wax crayons and pencil colors.</td></tr>
+                        <tr><td class="q-num">Q206</td><td class="q-text">What do you keep your books inside?</td><td class="a-text">I keep all my books safely inside my school bag.</td></tr>
+                        <tr><td class="q-num">Q207</td><td class="q-text">What do teachers write notes on in class?</td><td class="a-text">Teachers write notes on the large classroom blackboard.</td></tr>
+                        <tr><td class="q-num">Q208</td><td class="q-text">What do teachers use to write on the blackboard?</td><td class="a-text">Teachers use white chalk or marker pens.</td></tr>
+                        <tr><td class="q-num">Q209</td><td class="q-text">What do you sit on while studying in class?</td><td class="a-text">I sit on a comfortable wooden chair at my desk.</td></tr>
+                        <tr><td class="q-num">Q210</td><td class="q-text">Where do you keep your notebooks while writing?</td><td class="a-text">I keep my notebooks flat on my school desk.</td></tr>
+                        <tr><td class="q-num">Q211</td><td class="q-text">Who is the head of your school?</td><td class="a-text">Our principal is the head of the school institution.</td></tr>
+                        <tr><td class="q-num">Q212</td><td class="q-text">Where do you go to borrow storybooks?</td><td class="a-text">We go to the school library to read and borrow books.</td></tr>
+                        <tr><td class="q-num">Q213</td><td class="q-text">Where do you play sports during physical education?</td><td class="a-text">We play sports on the large school playground.</td></tr>
+                        <tr><td class="q-num">Q214</td><td class="q-text">Where do you practice computer lessons?</td><td class="a-text">We practice computer lessons in the computer laboratory.</td></tr>
+                        <tr><td class="q-num">Q215</td><td class="q-text">What do you say when the school bell rings for assembly?</td><td class="a-text">We line up quietly and walk towards the assembly hall.</td></tr>
+                        <tr><td class="q-num">Q216</td><td class="q-text">What national song do we sing during morning assembly?</td><td class="a-text">We sing our national anthem, "Jana Gana Mana".</td></tr>
+                        <tr><td class="q-num">Q217</td><td class="q-text">How should we stand while singing the national anthem?</td><td class="a-text">We must stand in attention posture respectfully.</td></tr>
+                        <tr><td class="q-num">Q218</td><td class="q-text">Do you complete your classwork on time?</td><td class="a-text">Yes, I write neatly and finish my classwork promptly.</td></tr>
+                        <tr><td class="q-num">Q219</td><td class="q-text">What do you do when you don't understand a lesson?</td><td class="a-text">I raise my hand and politely ask my teacher to explain again.</td></tr>
+                        <tr><td class="q-num">Q220</td><td class="q-text">Do you help keep your classroom clean?</td><td class="a-text">Yes, I never throw paper scraps on the classroom floor.</td></tr>
+                        <tr><td class="q-num">Q221</td><td class="q-text">How do you treat your school benches and desks?</td><td class="a-text">I keep them clean and never draw or scribble on them.</td></tr>
+                        <tr><td class="q-num">Q222</td><td class="q-text">Do you take part in school annual sports?</td><td class="a-text">Yes, I participate in running races and fun games.</td></tr>
+                        <tr><td class="q-num">Q223</td><td class="q-text">Do you participate in drawing competitions?</td><td class="a-text">Yes, I love drawing and participating in school art events.</td></tr>
+                        <tr><td class="q-num">Q224</td><td class="q-text">How do you behave with the school bus driver?</td><td class="a-text">I greet him respectfully and follow all bus safety rules.</td></tr>
+                        <tr><td class="q-num">Q225</td><td class="q-text">Should you run inside school corridors?</td><td class="a-text">No, running in corridors is dangerous; we must walk quietly.</td></tr>
+                        <tr><td class="q-num">Q226</td><td class="q-text">What do you say when your teacher praises your work?</td><td class="a-text">I smile politely and say, "Thank you, Ma'am/Sir."</td></tr>
+                        <tr><td class="q-num">Q227</td><td class="q-text">Do you revise your lessons every day at home?</td><td class="a-text">Yes, daily revision helps me remember my lessons easily.</td></tr>
+                        <tr><td class="q-num">Q228</td><td class="q-text">What is your favorite school activity?</td><td class="a-text">My favorite activity is storytelling and craft making.</td></tr>
+                        <tr><td class="q-num">Q229</td><td class="q-text">Do you wear clean and polished shoes to school?</td><td class="a-text">Yes, I polish my school shoes every weekend.</td></tr>
+                        <tr><td class="q-num">Q230</td><td class="q-text">Is your school tie worn properly?</td><td class="a-text">Yes, my uniform tie and badge are always neat and tidy.</td></tr>
+                        <tr><td class="q-num">Q231</td><td class="q-text">Do you help classmates who drop their pencils?</td><td class="a-text">Yes, I kindly pick it up and hand it back to them.</td></tr>
+                        <tr><td class="q-num">Q232</td><td class="q-text">What do you say when borrowing a color pencil from a friend?</td><td class="a-text">I say, "May I please borrow your red crayon for a minute?"</td></tr>
+                        <tr><td class="q-num">Q233</td><td class="q-text">Do you return borrowed items immediately after use?</td><td class="a-text">Yes, I return them safely with a polite "Thank you."</td></tr>
+                        <tr><td class="q-num">Q234</td><td class="q-text">Do you listen when the school bell signals class break?</td><td class="a-text">Yes, I pack my books calmly when the bell rings.</td></tr>
+                        <tr><td class="q-num">Q235</td><td class="q-text">Are you proud of your school uniform?</td><td class="a-text">Yes, wearing my neat school uniform makes me feel proud.</td></tr>
+                        <tr><td class="q-num">Q236</td><td class="q-text">Do you participate in school prayer singing?</td><td class="a-text">Yes, I sing prayer songs clearly during assembly.</td></tr>
+                        <tr><td class="q-num">Q237</td><td class="q-text">How do you keep your notebooks covered?</td><td class="a-text">I wrap all my notebooks in clean paper covers with labels.</td></tr>
+                        <tr><td class="q-num">Q238</td><td class="q-text">Why do we cover our books with paper?</td><td class="a-text">Covering protects books from dust, water, and tearing.</td></tr>
+                        <tr><td class="q-num">Q239</td><td class="q-text">Do you arrive at school before the morning bell?</td><td class="a-text">Yes, I always reach school early before assembly begins.</td></tr>
+                        <tr><td class="q-num">Q240</td><td class="q-text">What is the best part about going to school?</td><td class="a-text">Learning new things and playing with friends is wonderful.</td></tr>
+                        <tr><td class="q-num">Q241</td><td class="q-text">Do you complete your projects on time?</td><td class="a-text">Yes, I complete my art and craft projects with parental help.</td></tr>
+                        <tr><td class="q-num">Q242</td><td class="q-text">How do you behave during school library periods?</td><td class="a-text">I maintain absolute silence and read books carefully.</td></tr>
+                        <tr><td class="q-num">Q243</td><td class="q-text">Do you respect school property like computers and desks?</td><td class="a-text">Yes, I handle school equipment with utmost care.</td></tr>
+                        <tr><td class="q-num">Q244</td><td class="q-text">Do you participate in class recitation?</td><td class="a-text">Yes, I recite English and Bengali poems with clear expression.</td></tr>
+                        <tr><td class="q-num">Q245</td><td class="q-text">How do teachers reward good students?</td><td class="a-text">Teachers give star stamps, smiley stickers, and words of praise.</td></tr>
+                        <tr><td class="q-num">Q246</td><td class="q-text">How do you feel when you receive a star grade?</td><td class="a-text">I feel extremely happy and encouraged to study harder.</td></tr>
+                        <tr><td class="q-num">Q247</td><td class="q-text">Do you work well in group classroom activities?</td><td class="a-text">Yes, I cooperate and share ideas happily with my group members.</td></tr>
+                        <tr><td class="q-num">Q248</td><td class="q-text">Are you excited for examinations to test your knowledge?</td><td class="a-text">Yes, exams help me show what I have learned in class.</td></tr>
+                        <tr><td class="q-num">Q249</td><td class="q-text">Do you thank your school principal and teachers daily?</td><td class="a-text">Yes, I greet them with respect every single day.</td></tr>
+                        <tr><td class="q-num">Q250</td><td class="q-text">Are you a sincere and hardworking student?</td><td class="a-text">Yes, I work hard to become a brilliant student at English Spur!</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- MODULE 6: FOOD, HEALTH & NUTRITION (Q251 - Q271) -->
+        <div class="module-card">
+            <div class="module-header">
+                <h2>Module 6: Healthy Food, Nutrition & Health (Q251 - Q271)</h2>
+                <p>Real questions regarding balanced diets, essential vitamins, clean water, and physical well-being.</p>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead><tr><th style="width:70px;">#</th><th>Question</th><th>Model Answer</th></tr></thead>
+                    <tbody>
+                        <tr><td class="q-num">Q251</td><td class="q-text">Why do we need food every day?</td><td class="a-text">We need food to get energy, grow strong, and stay healthy.</td></tr>
+                        <tr><td class="q-num">Q252</td><td class="q-text">What is a balanced diet?</td><td class="a-text">A balanced diet includes fruits, vegetables, milk, and grains.</td></tr>
+                        <tr><td class="q-num">Q253</td><td class="q-text">Which fruits are rich in vitamins and sweet taste?</td><td class="a-text">Apples, mangoes, bananas, and oranges are packed with vitamins.</td></tr>
+                        <tr><td class="q-num">Q254</td><td class="q-text">Why are green leafy vegetables important for our eyes?</td><td class="a-text">They contain nutrients that keep our eyesight sharp and healthy.</td></tr>
+                        <tr><td class="q-num">Q255</td><td class="q-text">What does milk provide to our body?</td><td class="a-text">Milk provides calcium to make our bones and teeth strong.</td></tr>
+                        <tr><td class="q-num">Q256</td><td class="q-text">Why should we drink boiled or filtered water?</td><td class="a-text">Filtered water removes germs and keeps us safe from illness.</td></tr>
+                        <tr><td class="q-num">Q257</td><td class="q-text">Is fast food and cold drink good for health?</td><td class="a-text">No, junk food lacks nutrition and harms our stomach.</td></tr>
+                        <tr><td class="q-num">Q258</td><td class="q-text">What happens if we eat too many chocolates?</td><td class="a-text">Eating too many sweets causes tooth decay and stomach aches.</td></tr>
+                        <tr><td class="q-num">Q259</td><td class="q-text">How many meals should we eat daily?</td><td class="a-text">We should eat three main meals: breakfast, lunch, and dinner.</td></tr>
+                        <tr><td class="q-num">Q260</td><td class="q-text">Why should we chew our food slowly?</td><td class="a-text">Chewing slowly helps our stomach digest food properly.</td></tr>
+                        <tr><td class="q-num">Q261</td><td class="q-text">Should we talk while our mouth is full of food?</td><td class="a-text">No, talking with food in our mouth is bad table manners.</td></tr>
+                        <tr><td class="q-num">Q262</td><td class="q-text">What should we do after eating oily food?</td><td class="a-text">We should wash our hands and rinse our mouth thoroughly.</td></tr>
+                        <tr><td class="q-num">Q263</td><td class="q-text">Why do we need physical rest?</td><td class="a-text">Rest helps our tired body recover and regain energy.</td></tr>
+                        <tr><td class="q-num">Q264</td><td class="q-text">How does playing outdoor games help our health?</td><td class="a-text">Outdoor games make our heart, lungs, and muscles active.</td></tr>
+                        <tr><td class="q-num">Q265</td><td class="q-text">What should you do if you catch a cold?</td><td class="a-text">I should take rest, drink warm water, and consult a doctor.</td></tr>
+                        <tr><td class="q-num">Q266</td><td class="q-text">Why is personal cleanliness important?</td><td class="a-text">Cleanliness keeps harmful bacteria and diseases away.</td></tr>
+                        <tr><td class="q-num">Q267</td><td class="q-text">How often should we cut our hair?</td><td class="a-text">We should trim our hair neatly every month or two.</td></tr>
+                        <tr><td class="q-num">Q268</td><td class="q-text">Should we rub our eyes with dirty hands?</td><td class="a-text">No, dirty hands can transfer germs and cause eye infections.</td></tr>
+                        <tr><td class="q-num">Q269</td><td class="q-text">What should you use to clean your ears?</td><td class="a-text">We should use soft clean towels and let parents clean gently.</td></tr>
+                        <tr><td class="q-num">Q270</td><td class="q-text">Why is breathing fresh morning air beneficial?</td><td class="a-text">Fresh air purifies our lungs and refreshes our mind.</td></tr>
+                        <tr><td class="q-num">Q271</td><td class="q-text">What energy-giving food do we get from grains?</td><td class="a-text">Rice and wheat provide carbohydrates for daily energy.</td></tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 
-    <!-- ডানদিকের কর্নারে ফিক্সড "Developed by Shovan Kapri" -->
-    <div class="top-right-developer-badge">
-        Developed by <span>শোভন কাপড়ী</span>
-    </div>
+    <footer>
+        <p><strong>ENGLISH SPUR ONLINE ENGLISH TRAINING ACADEMY</strong></p>
+        <p>Address: Kanaipur, Bantul, Bagnan, Howrah - 711312 | Contact: +91 9875340842</p>
+        <p>Founder: Sovan Kapri (শোভন কাপড়ী )</p>
+        <p style="margin-top: 15px; font-size: 9.5pt; opacity: 0.85;">&copy; 2026 English Spur. All Rights Reserved. Complete Real Q&A Master Edition.</p>
+    </footer>
 
-    <!-- পাসওয়ার্ড লগইন স্ক্রিন -->
-    <div id="login-screen" class="login-container">
-        <div class="login-box">
-            <h2>🔒 প্রজেক্ট লকড (Locked)</h2>
-            <p>অনুগ্রহ করে পাসওয়ার্ড দিয়ে প্রবেশ করুন:</p>
-            <input type="password" id="password-input" placeholder="পাসওয়ার্ড লিখুন..." />
-            <button onclick="handleLogin()">লগইন করুন</button>
-            <p id="error-msg" class="error-text"></p>
-        </div>
-    </div>
-
-    <!-- ইউটিলিটি মডাল উইন্ডোজ -->
-    <div class="utility-modal-overlay" id="utilityModalOverlay" onclick="if(event.target === this) closeUtilityModal()">
-        <div class="utility-modal-box">
-            <div class="utility-modal-header">
-                <span id="utilityModalTitle"><i class="fas fa-tools"></i> Utility Tool</span>
-                <button onclick="closeUtilityModal()" style="background: none; border: none; color: white; font-size: 14px; cursor: pointer;"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="utility-modal-body" id="utilityModalBody">
-                <!-- Dynamic Content Loaded Here -->
-            </div>
-        </div>
-    </div>
-
-    <div class="pdf-tab-bar" id="pdfTabBar"></div>
-
-    <div class="acrobat-toolbar">
-        <!-- ব্র্যান্ড এবং ফাইল ওপেন -->
-        <div class="toolbar-section">
-            <div class="brand-mini">
-                <img src="logo.png" alt="Logo" onerror="this.style.display='none'">
-                <span>ENGLISH <span>SPUR</span></span>
-            </div>
-            <label class="file-upload-btn" title="Open PDF or Image (Ctrl+O)">
-                <i class="fas fa-folder-open"></i> Open <span class="shortcut-badge">Ctrl+O</span>
-                <input type="file" id="pdfUpload" accept=".pdf,image/*" multiple>
-            </label>
-        </div>
-
-        <div class="toolbar-section" style="overflow-x: auto; padding: 2px 0;">
-            <!-- 1. Colour and stroke -->
-            <div class="color-picker-wrapper" title="Universal Colors for Writing & Drawing">
-                <span>Color:</span>
-                <span class="fixed-color-btn" style="background-color: #ffffff;" onclick="changeColor('#ffffff', this)" title="White"></span>
-                <span class="fixed-color-btn" style="background-color: #facc15;" onclick="changeColor('#facc15', this)" title="Chalk Yellow"></span>
-                <span class="fixed-color-btn" style="background-color: #38bdf8;" onclick="changeColor('#38bdf8', this)" title="Sky Blue"></span>
-                <span class="fixed-color-btn" style="background-color: #4ade80;" onclick="changeColor('#4ade80', this)" title="Neon Green"></span>
-                <span class="fixed-color-btn" style="background-color: #f97316;" onclick="changeColor('#f97316', this)" title="Orange"></span>
-                <span class="fixed-color-btn" style="background-color: #ef4444;" onclick="changeColor('#ef4444', this)" title="Red"></span>
-                <span class="fixed-color-btn" style="background-color: #e879f9;" onclick="changeColor('#e879f9', this)" title="Pink"></span>
-                <span class="fixed-color-btn" style="background-color: #c084fc;" onclick="changeColor('#c084fc', this)" title="Purple"></span>
-                <span class="fixed-color-btn" style="background-color: #60a5fa;" onclick="changeColor('#60a5fa', this)" title="Royal Blue"></span>
-                <span class="fixed-color-btn" style="background-color: #1e3a8a;" onclick="changeColor('#1e3a8a', this)" title="Deep Royal Blue"></span>
-                <span class="fixed-color-btn" style="background-color: #311005;" onclick="changeColor('#311005', this)" title="Rich Dark Brown"></span>
-                <span class="fixed-color-btn" style="background-color: #111827;" onclick="changeColor('#111827', this)" title="Dark Charcoal"></span>
-                <span class="fixed-color-btn selected" style="background-color: #0f172a;" onclick="changeColor('#0f172a', this)" title="Jet Black / Navy"></span>
-            </div>
-            <select class="size-select" id="sizeSelector" onchange="changeSize(this.value)" title="Tool Size (1px - 30px)">
-                <option value="1">1px</option>
-                <option value="2" selected>2px</option>
-                <option value="3">3px</option>
-                <option value="4">4px</option>
-                <option value="5">5px</option>
-                <option value="6">6px</option>
-                <option value="8">8px</option>
-                <option value="10">10px</option>
-                <option value="12">12px</option>
-                <option value="15">15px</option>
-                <option value="20">20px</option>
-                <option value="22">22px</option>
-                <option value="25">25px</option>
-                <option value="30">30px</option>
-            </select>
-
-            <!-- 2. Pen -->
-            <button class="tool-btn active" id="penBtn" onclick="setMode('pen')" title="Pen (Shortcut: P)"><i class="fas fa-pen"></i> Pen <span class="shortcut-badge">P</span></button>
-            
-            <!-- 3. Box -->
-            <button class="tool-btn" id="boxBtn" onclick="setMode('box')" title="Box (Shortcut: B)"><i class="fas fa-vector-square"></i> Box <span class="shortcut-badge">B</span></button>
-            
-            <!-- 4. Line -->
-            <button class="tool-btn" id="lineBtn" onclick="setMode('line')" title="Line (Shortcut: L)"><i class="fas fa-slash"></i> Line <span class="shortcut-badge">L</span></button>
-            
-            <!-- 5. Eraser -->
-            <button class="tool-btn" id="eraserBtn" onclick="setMode('eraser')" title="Eraser (Shortcut: E)"><i class="fas fa-eraser"></i> Eraser <span class="shortcut-badge">E</span></button>
-
-            <!-- 6. Highlight -->
-            <button class="tool-btn" id="highlighterBtn" onclick="setMode('highlighter')" title="Highlighter (Shortcut: H)"><i class="fas fa-highlighter"></i> Highlight <span class="shortcut-badge">H</span></button>
-            
-            <!-- 7. Circle -->
-            <button class="tool-btn" id="circleBtn" onclick="setMode('circle')" title="Circle (Shortcut: C)"><i class="fas fa-circle"></i> Circle <span class="shortcut-badge">C</span></button>
-            
-            <!-- 8. Arrow -->
-            <button class="tool-btn" id="arrowBtn" onclick="setMode('arrow')" title="Arrow (Shortcut: A)"><i class="fas fa-location-arrow"></i> Arrow <span class="shortcut-badge">A</span></button>
-
-            <!-- 9. Clear -->
-            <button class="tool-btn danger" onclick="clearCanvas()" title="Clear All (Delete)"><i class="fas fa-trash"></i> Clear <span class="shortcut-badge">Del</span></button>
-            
-            <!-- 10. Page Navigator -->
-            <div style="display: flex; align-items: center; gap: 3px; background: #f1f5f9; padding: 2px 6px; border-radius: 6px; border: 1px solid var(--border); flex-shrink: 0;" title="Prev/Next Page (Left/Right Arrows)">
-                <button class="tool-btn secondary" style="padding: 3px 6px;" onclick="prevPage()" title="Previous Page"><i class="fas fa-chevron-left"></i></button>
-                <span class="page-indicator"><input type="text" id="pageJumpInput" class="page-jump-input" value="1" onchange="jumpToPage(this.value)"> / <span id="page_count">1</span></span>
-                <button class="tool-btn secondary" style="padding: 3px 6px;" onclick="nextPage()" title="Next Page"><i class="fas fa-chevron-right"></i></button>
-            </div>
-
-            <!-- 11. Fit & Width Buttons -->
-            <button class="tool-btn secondary" onclick="fitToPage()" title="Fit to Page (F)"><i class="fas fa-expand"></i> Fit <span class="shortcut-badge">F</span></button>
-            <button class="tool-btn secondary" onclick="fitToWidth()" title="Page Width Fit (W)"><i class="fas fa-arrows-alt-h"></i> Width <span class="shortcut-badge">W</span></button>
-            <button class="tool-btn secondary" onclick="zoomIn()" title="Zoom In (Ctrl +)"><i class="fas fa-search-plus"></i></button>
-            <button class="tool-btn secondary" onclick="zoomOut()" title="Zoom Out (Ctrl -)"><i class="fas fa-search-minus"></i></button>
-            <input type="text" class="zoom-indicator-input" id="zoomIndicatorInput" value="135%" title="Type zoom percentage and press Enter" onchange="jumpToZoom(this.value)" onkeypress="if(event.key==='Enter') jumpToZoom(this.value)">
-
-            <!-- 12. Audio, Video, Notepad, Calculator, Currency, Clock, Fun Facts, Refresh & Google Tools -->
-            <div class="toolbar-audio-widget" title="Background Audio Player">
-                <label for="audio-file-input" class="audio-ctrl-btn" title="Upload Audio Files"><i class="fas fa-folder-open"></i></label>
-                <input type="file" id="audio-file-input" accept="audio/*,.mp3,.wav,.aac,.ogg,.flac,.m4a,.wma,.opus" multiple style="display: none;" />
-                <select id="audioTrackSelect" onchange="selectAudioTrack(this.value)">
-                    <option value="">Audio...</option>
-                </select>
-                <button class="audio-ctrl-btn" id="toolbarPlayBtn" onclick="togglePlayAudio()" title="Play/Pause (Space)"><i class="fas fa-play" id="playIcon"></i></button>
-                <button class="audio-ctrl-btn" onclick="stopAudio()" title="Stop"><i class="fas fa-stop"></i></button>
-                <button class="audio-ctrl-btn" onclick="removeAudioTrack(audioTrackSelect.value)" title="Delete Current Track" style="background: #ef4444;"><i class="fas fa-trash"></i></button>
-                <audio id="audio-element"></audio>
-            </div>
-            <button class="tool-btn video-toggle-btn" id="videoToggleBtn" onclick="toggleVideoWindow()" title="Toggle Video Player Mode (V)"><i class="fas fa-video"></i> Video <span class="shortcut-badge">V</span></button>
-            <button class="tool-btn board-btn" id="notepadToggleBtn" onclick="toggleNotepadWindow()" title="Toggle Fixed Notepad (N)"><i class="fas fa-chalkboard"></i> Notepad <span class="shortcut-badge">N</span></button>
-            
-            <!-- ইউটিলিটি টুলস -->
-            <button class="tool-btn util-btn" onclick="openUtility('calc')" title="Calculator"><i class="fas fa-calculator"></i> Calc</button>
-            <button class="tool-btn util-btn" onclick="openUtility('currency')" title="Currency Converter"><i class="fas fa-exchange-alt"></i> Currency</button>
-            <button class="tool-btn util-btn" onclick="openUtility('clock')" title="World Clock"><i class="fas fa-globe"></i> Clock</button>
-            <button class="tool-btn util-btn" onclick="openUtility('facts')" title="English Fun Facts"><i class="fas fa-lightbulb"></i> Fun Facts</button>
-
-            <button class="tool-btn secondary" onclick="refreshSystemState()" title="Refresh System (R)"><i class="fas fa-sync-alt"></i> Refresh <span class="shortcut-badge">R</span></button>
-            <button class="tool-btn google-btn" onclick="openGoogleModal()" title="Open Google In-App Layer (G)"><i class="fab fa-google"></i> Google <span class="shortcut-badge">G</span></button>
-
-            <!-- 13. Theme Selector -->
-            <select class="theme-selector" id="themeSelector" onchange="setTheme(this.value)" title="Theme Selector">
-                <option value="sea-green">🌿 Green</option>
-                <option value="warm-cream">📜 Cream</option>
-                <option value="slate-gray">💻 Slate</option>
-                <option value="soft-indigo">🔮 Indigo</option>
-                <option value="rose-quartz">🌸 Rose</option>
-            </select>
-
-            <!-- 14. Baki Gulo -->
-            <button class="tool-btn" id="mouseBtn" onclick="setMode('mouse')" title="Pan Tool (M)"><i class="fas fa-hand-paper"></i> Pan <span class="shortcut-badge">M</span></button>
-            <button class="tool-btn" id="textToolBtn" onclick="setMode('text')" title="Note / Free Type (T)"><i class="fas fa-font"></i> Note <span class="shortcut-badge">T</span></button>
-            <button class="tool-btn secondary" onclick="undoCanvas()" title="Undo (Ctrl+Z)"><i class="fas fa-undo"></i> <span class="shortcut-badge">Ctrl+Z</span></button>
-            <button class="tool-btn secondary" onclick="redoCanvas()" title="Redo (Ctrl+Y)"><i class="fas fa-redo"></i> <span class="shortcut-badge">Ctrl+Y</span></button>
-        </div>
-    </div>
-
-    <!-- মূল ফুল-স্ক্রিন ফ্লেক্স ওয়ার্কস্পেস -->
-    <div class="workspace">
-        <main class="pdf-view-area" id="pdfViewArea">
-            <div class="canvas-container" id="canvasContainer">
-                <canvas id="pdfCanvas"></canvas>
-                <canvas id="drawCanvas"></canvas>
-            </div>
-        </main>
-
-        <!-- Google In-App Layer Modal -->
-        <div class="google-modal-layer" id="googleModalLayer">
-            <div class="google-modal-box">
-                <div class="google-modal-header">
-                    <span><i class="fab fa-google"></i> Google Browser (In-App Layer)</span>
-                    <button class="google-modal-close" onclick="closeGoogleModal()">Close (✕)</button>
-                </div>
-                <iframe id="googleIframe" class="google-modal-iframe" src=""></iframe>
-            </div>
-        </div>
-
-        <!-- সাইড ভিডিও প্লেয়ার প্যানেল -->
-        <div class="side-video-panel" id="sideVideoPanel">
-            <div class="video-header-bar">
-                <span><i class="fas fa-video"></i> Video Player Suite</span>
-                <button onclick="toggleVideoWindow()" style="background: none; border: none; font-size: 14px; cursor: pointer; color: white; padding: 2px 6px;"><i class="fas fa-times"></i></button>
-            </div>
-            
-            <div class="video-scroll-content">
-                <div class="media-card">
-                    <div class="video-top-priority-section">
-                        <p id="current-video-title">Select a video</p>
-                        <video id="video-element" controls></video>
-                    </div>
-
-                    <div class="folder-picker-card">
-                        <label for="video-folder-input" class="folder-btn" style="background: #0284c7;">📁 ফোল্ডার</label>
-                        <input type="file" id="video-folder-input" webkitdirectory directory multiple style="display: none;" />
-                        
-                        <label for="video-file-input" class="folder-btn" style="background: #0369a1;">📄 ফাইল</label>
-                        <input type="file" id="video-file-input" accept="video/*,.mp4,.mov,.wmv,.avi,.mkv,.webm,.m4v,.3gp,.flv" multiple style="display: none;" />
-                        
-                        <p id="video-folder-status" class="status-text">কোনো ভিডিও সিলেক্ট করা হয়নি</p>
-                    </div>
-
-                    <div class="playlist-container" id="video-playlist">
-                        <div style="padding: 10px; text-align: center; color: #94a3b8; font-size: 10.5px;">ভিডিও ফাইল বা ফোল্ডার দিন</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- সাইড ফিক্সড নোটপ্যাড প্যানেল -->
-        <div class="side-video-panel" id="sideNotepadPanel">
-            <div class="video-header-bar" style="background: linear-gradient(135deg, #0d9488, #065f46);">
-                <span><i class="fas fa-chalkboard"></i> Writing Board (Scrollable)</span>
-                <button onclick="toggleNotepadWindow()" style="background: none; border: none; font-size: 14px; cursor: pointer; color: white; padding: 2px 6px;"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="video-scroll-content" style="padding: 10px; display: flex; flex-direction: column; height: 100%;">
-                <div class="media-card" style="flex-grow: 1; display: flex; flex-direction: column; background: #ffffff; border-color: #0d9488; position: relative; overflow: hidden;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; padding: 4px; background: #f1f5f9; border-radius: 6px; flex-shrink: 0;">
-                        <div style="display: flex; gap: 4px; align-items: center;">
-                            <span style="font-size: 10.5px; font-weight: 800; color: #0f172a;">Bg:</span>
-                            <span class="fixed-color-btn" style="background-color: #ffffff; border: 1px solid #cbd5e1;" onclick="changeNotepadBg('#ffffff')" title="Pure White"></span>
-                            <span class="fixed-color-btn" style="background-color: #fef9c3;" onclick="changeNotepadBg('#fef9c3')" title="Soft Yellow"></span>
-                            <span class="fixed-color-btn" style="background-color: #f0fdf4;" onclick="changeNotepadBg('#f0fdf4')" title="Light Pastel Green"></span>
-                            <span class="fixed-color-btn" style="background-color: #f8fafc;" onclick="changeNotepadBg('#f8fafc')" title="Light Gray"></span>
-                        </div>
-                        <button class="tool-btn danger" style="padding: 2px 6px; font-size: 10px;" onclick="clearNotepadCanvas()"><i class="fas fa-trash"></i> Clear</button>
-                    </div>
-                    <div id="notepadScrollArea" style="position: relative; flex-grow: 1; width: 100%; background: #ffffff; border-radius: 6px; overflow-y: auto; overflow-x: hidden; cursor: crosshair; border: 1px solid var(--border);">
-                        <canvas id="notepadCanvas" style="display: block; width: 100%; height: 2000px; touch-action: none;"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const PROJECT_PASSWORD = "9842";
-
-        function handleLogin() {
-            let pass = document.getElementById('password-input').value;
-            let err = document.getElementById('error-msg');
-            if (pass === PROJECT_PASSWORD) {
-                document.getElementById('login-screen').style.display = 'none';
-            } else {
-                err.textContent = 'ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।';
-                document.getElementById('password-input').value = '';
-            }
-        }
-        document.getElementById('password-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') handleLogin(); });
-
-        let pendingAction = null;
-        function showConfirmDialog(title, message, callback) {
-            document.getElementById('confirmTitle').textContent = title;
-            document.getElementById('confirmMessage').textContent = message;
-            document.getElementById('confirmModalOverlay').style.display = 'flex';
-            pendingAction = callback;
-        }
-
-        function closeConfirmModal(isConfirmed) {
-            document.getElementById('confirmModalOverlay').style.display = 'none';
-            if (isConfirmed && pendingAction) {
-                pendingAction();
-            }
-            pendingAction = null;
-        }
-
-        function refreshSystemState() {
-            showConfirmDialog("সিস্টেম রিফ্রেশ", "আপনি কি সিস্টেমটি রিফ্রেশ করতে চান? (আপনার লগইন এবং বর্তমান সেশন সুরক্ষিত থাকবে)", () => {
-                let tab = getCurrentTab();
-                if (tab) {
-                    saveCurrentPageData(tab);
-                    renderPage(tab.pageNum);
-                }
-                if (typeof initNotepadCanvas === 'function') {
-                    initNotepadCanvas();
-                }
-            });
-        }
-
-        /* ইউটিলিটি টুলস লজিক (Calculator, Currency Converter, World Clock with Date/Day, and Date-based Daily Fun Facts) */
-        function openUtility(type) {
-            let titleEl = document.getElementById('utilityModalTitle');
-            let bodyEl = document.getElementById('utilityModalBody');
-            let modal = document.getElementById('utilityModalOverlay');
-            modal.classList.add('active');
-
-            if (type === 'calc') {
-                titleEl.innerHTML = '<i class="fas fa-calculator"></i> Calculator';
-                bodyEl.innerHTML = `
-                    <input type="text" id="calcScreen" class="calc-screen" readonly value="0">
-                    <div class="calc-grid">
-                        <button class="calc-btn operator" onclick="calcClear()">C</button>
-                        <button class="calc-btn operator" onclick="calcAppend('/')">/</button>
-                        <button class="calc-btn operator" onclick="calcAppend('*')">×</button>
-                        <button class="calc-btn operator" onclick="calcBack()">⌫</button>
-                        <button class="calc-btn" onclick="calcAppend('7')">7</button>
-                        <button class="calc-btn" onclick="calcAppend('8')">8</button>
-                        <button class="calc-btn" onclick="calcAppend('9')">9</button>
-                        <button class="calc-btn operator" onclick="calcAppend('-')">-</button>
-                        <button class="calc-btn" onclick="calcAppend('4')">4</button>
-                        <button class="calc-btn" onclick="calcAppend('5')">5</button>
-                        <button class="calc-btn" onclick="calcAppend('6')">6</button>
-                        <button class="calc-btn operator" onclick="calcAppend('+')">+</button>
-                        <button class="calc-btn" onclick="calcAppend('1')">1</button>
-                        <button class="calc-btn" onclick="calcAppend('2')">2</button>
-                        <button class="calc-btn" onclick="calcAppend('3')">3</button>
-                        <button class="calc-btn operator" style="grid-row: span 2; height: 100%; background: var(--primary); color: white;" onclick="calcEval()">=</button>
-                        <button class="calc-btn" style="grid-column: span 2;" onclick="calcAppend('0')">0</button>
-                        <button class="calc-btn" onclick="calcAppend('.')">.</button>
-                    </div>
-                `;
-            } else if (type === 'currency') {
-                titleEl.innerHTML = '<i class="fas fa-exchange-alt"></i> Currency Converter';
-                bodyEl.innerHTML = `
-                    <div class="util-input-group">
-                        <label>Amount:</label>
-                        <input type="number" id="currAmount" value="1" oninput="convertCurrency()">
-                    </div>
-                    <div class="util-input-group">
-                        <label>From:</label>
-                        <select id="currFrom" onchange="convertCurrency()">
-                            <option value="INR">INR (₹)</option>
-                            <option value="USD" selected>USD ($)</option>
-                            <option value="EUR">EUR (€)</option>
-                            <option value="GBP">GBP (£)</option>
-                            <option value="CAD">CAD ($)</option>
-                            <option value="AUD">AUD ($)</option>
-                            <option value="JPY">JPY (¥)</option>
-                        </select>
-                    </div>
-                    <div class="util-input-group">
-                        <label>To:</label>
-                        <select id="currTo" onchange="convertCurrency()">
-                            <option value="INR" selected>INR (₹)</option>
-                            <option value="USD">USD ($)</option>
-                            <option value="EUR">EUR (€)</option>
-                            <option value="GBP">GBP (£)</option>
-                            <option value="CAD">CAD ($)</option>
-                            <option value="AUD">AUD ($)</option>
-                            <option value="JPY">JPY (¥)</option>
-                        </select>
-                    </div>
-                    <div id="currResult" style="background: #e2e8f0; padding: 14px; border-radius: 8px; font-weight: 800; font-size: 16px; text-align: center; color: var(--primary); margin-top: 4px;">
-                        Result: 83.50 INR
-                    </div>
-                `;
-                convertCurrency();
-            } else if (type === 'clock') {
-                titleEl.innerHTML = '<i class="fas fa-globe"></i> World Clock & Date';
-                bodyEl.innerHTML = `
-                    <div class="clock-card"><div style="display:flex; align-items:center;"><span class="clock-flag">🇮🇳</span><div class="clock-info"><span class="clock-country">India (Kolkata)</span><span class="clock-date" id="dateKolkata">--/--/----</span></div></div><span class="clock-time" id="clockKolkata">--:--:--</span></div>
-                    <div class="clock-card"><div style="display:flex; align-items:center;"><span class="clock-flag">🇧🇩</span><div class="clock-info"><span class="clock-country">Bangladesh (Dhaka)</span><span class="clock-date" id="dateDhaka">--/--/----</span></div></div><span class="clock-time" id="clockDhaka">--:--:--</span></div>
-                    <div class="clock-card"><div style="display:flex; align-items:center;"><span class="clock-flag">🇺🇸</span><div class="clock-info"><span class="clock-country">USA (New York)</span><span class="clock-date" id="dateNY">--/--/----</span></div></div><span class="clock-time" id="clockNY">--:--:--</span></div>
-                    <div class="clock-card"><div style="display:flex; align-items:center;"><span class="clock-flag">🇬🇧</span><div class="clock-info"><span class="clock-country">UK (London)</span><span class="clock-date" id="dateLondon">--/--/----</span></div></div><span class="clock-time" id="clockLondon">--:--:--</span></div>
-                    <div class="clock-card"><div style="display:flex; align-items:center;"><span class="clock-flag">🇦🇺</span><div class="clock-info"><span class="clock-country">Australia (Sydney)</span><span class="clock-date" id="dateSydney">--/--/----</span></div></div><span class="clock-time" id="clockSydney">--:--:--</span></div>
-                    <div class="clock-card"><div style="display:flex; align-items:center;"><span class="clock-flag">🇨🇦</span><div class="clock-info"><span class="clock-country">Canada (Toronto)</span><span class="clock-date" id="dateToronto">--/--/----</span></div></div><span class="clock-time" id="clockToronto">--:--:--</span></div>
-                    <div class="clock-card"><div style="display:flex; align-items:center;"><span class="clock-flag">🇦🇪</span><div class="clock-info"><span class="clock-country">UAE (Dubai)</span><span class="clock-date" id="dateDubai">--/--/----</span></div></div><span class="clock-time" id="clockDubai">--:--:--</span></div>
-                    <div class="clock-card"><div style="display:flex; align-items:center;"><span class="clock-flag">🇯🇵</span><div class="clock-info"><span class="clock-country">Japan (Tokyo)</span><span class="clock-date" id="dateTokyo">--/--/----</span></div></div><span class="clock-time" id="clockTokyo">--:--:--</span></div>
-                `;
-                updateWorldClocks();
-            } else if (type === 'facts') {
-                titleEl.innerHTML = '<i class="fas fa-lightbulb"></i> Daily English Fun Facts';
-                
-                const dailyFactsDB = [
-                    { title: "Pangram Wonder", text: 'The sentence "The quick brown fox jumps over the lazy dog" contains every single letter of the alphabet!' },
-                    { title: "Shortest Sentence", text: '"Go!" is officially recognized as the shortest grammatically correct sentence in the English language.' },
-                    { title: "The Word 'Set'", text: 'The word "set" holds the world record for having the highest number of separate definitions in the dictionary.' },
-                    { title: "Rapid Growth", text: 'Approximately one new word is officially added to the English language dictionary every two hours!' },
-                    { title: "Shakespeare's Impact", text: 'William Shakespeare invented over 1,700 common words that we still use today by changing nouns to verbs!' },
-                    { title: "Most Common Letter", text: 'The letter "E" is by far the most commonly used letter in the entire English alphabet system.' },
-                    { title: "Ghost Words", text: 'The English dictionary once contained a completely fake word for seven years due to a printing typo ("Dord").' },
-                    { title: "Oldest English Word", text: 'Words like "town", "good", "water", and "man" are among the oldest surviving words in the English language.' }
-                ];
-
-                let dayOfYear = Math.floor((new Date() - new Date(new Date().getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-                let todayFact = dailyFactsDB[dayOfYear % dailyFactsDB.length];
-                let secondFact = dailyFactsDB[(dayOfYear + 1) % dailyFactsDB.length];
-
-                bodyEl.innerHTML = `
-                    <div style="background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 16px; border-radius: 12px; margin-bottom: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.85; font-weight: 800; margin-bottom: 4px;"><i class="fas fa-calendar-day"></i> Today's Special Fact</div>
-                        <div style="font-size: 14px; font-weight: 800; margin-bottom: 6px;">${todayFact.title}</div>
-                        <div style="font-size: 13px; font-weight: 600; line-height: 1.5;">${todayFact.text}</div>
-                    </div>
-                    <div class="fact-card"><i class="fas fa-lightbulb fact-icon"></i><div class="fact-content"><span class="fact-title">Bonus Fact</span><span>${secondFact.text}</span></div></div>
-                    <div class="fact-card"><i class="fas fa-star fact-icon"></i><div class="fact-content"><span class="fact-title">Language Tip</span><span>Consistent daily practice of reading English articles or PDFs for just 15 minutes doubles fluency speed!</span></div></div>
-                `;
-            }
-        }
-
-        function closeUtilityModal() {
-            document.getElementById('utilityModalOverlay').classList.remove('active');
-        }
-
-        // ক্যালকুলেটর ফাংশনস
-        let calcVal = "0";
-        function calcClear() { calcVal = "0"; document.getElementById('calcScreen').value = calcVal; }
-        function calcAppend(char) {
-            if (calcVal === "0" && char !== '.') calcVal = char;
-            else calcVal += char;
-            document.getElementById('calcScreen').value = calcVal;
-        }
-        function calcBack() {
-            calcVal = calcVal.length > 1 ? calcVal.slice(0, -1) : "0";
-            document.getElementById('calcScreen').value = calcVal;
-        }
-        function calcEval() {
-            try { calcVal = eval(calcVal).toString(); } catch { calcVal = "Error"; }
-            document.getElementById('calcScreen').value = calcVal;
-        }
-
-        // কারেন্সি কনভার্টার ফাংশনস (USD Based Rates)
-        function convertCurrency() {
-            let amount = parseFloat(document.getElementById('currAmount').value) || 0;
-            let from = document.getElementById('currFrom').value;
-            let to = document.getElementById('currTo').value;
-            
-            let rates = { USD: 1, INR: 83.5, EUR: 0.92, GBP: 0.79, CAD: 1.35, AUD: 1.52, JPY: 155.0 };
-            let inUSD = amount / rates[from];
-            let finalVal = inUSD * rates[to];
-            document.getElementById('currResult').textContent = `Result: ${finalVal.toFixed(2)} ${to}`;
-        }
-
-        // ওয়ার্ল্ড ক্লক লজিক (Time, Date & Day)
-        function updateWorldClocks() {
-            setInterval(() => {
-                let now = new Date();
-                try {
-                    updateSingleClock('Kolkata', 'Asia/Kolkata', now);
-                    updateSingleClock('Dhaka', 'Asia/Dhaka', now);
-                    updateSingleClock('NY', 'America/New_York', now);
-                    updateSingleClock('London', 'Europe/London', now);
-                    updateSingleClock('Sydney', 'Australia/Sydney', now);
-                    updateSingleClock('Toronto', 'America/Toronto', now);
-                    updateSingleClock('Dubai', 'Asia/Dubai', now);
-                    updateSingleClock('Tokyo', 'Asia/Tokyo', now);
-                } catch(e) {}
-            }, 1000);
-        }
-
-        function updateSingleClock(id, tz, now) {
-            let timeStr = now.toLocaleTimeString('en-US', { timeZone: tz, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-            let dateStr = now.toLocaleDateString('en-GB', { timeZone: tz, weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' });
-            let tEl = document.getElementById('clock' + id);
-            let dEl = document.getElementById('date' + id);
-            if(tEl) tEl.textContent = timeStr;
-            if(dEl) dEl.textContent = dateStr;
-        }
-
-        // Free space mouse panning support on pdfViewArea
-        const pdfViewArea = document.getElementById('pdfViewArea');
-        let isDraggingView = false, startViewX = 0, startViewY = 0;
-
-        pdfViewArea.addEventListener('mousedown', (e) => {
-            if (e.target === pdfViewArea || e.target.id === 'canvasContainer') {
-                isDraggingView = true;
-                startViewX = e.clientX - pdfViewArea.scrollLeft;
-                startViewY = e.clientY - pdfViewArea.scrollTop;
-            }
-        });
-
-        window.addEventListener('mousemove', (e) => {
-            if (!isDraggingView) return;
-            pdfViewArea.scrollLeft = e.clientX - startViewX;
-            pdfViewArea.scrollTop = e.clientY - startViewY;
-        });
-
-        window.addEventListener('mouseup', () => {
-            isDraggingView = false;
-        });
-
-        function toggleVideoWindow() {
-            let panel = document.getElementById('sideVideoPanel');
-            let btn = document.getElementById('videoToggleBtn');
-            panel.classList.toggle('active');
-            document.body.classList.toggle('video-mode-active');
-            
-            let tab = getCurrentTab();
-            if (panel.classList.contains('active')) {
-                btn.classList.add('active-video');
-                if (tab) {
-                    tab.scale = 1.2; 
-                    updateZoomIndicator(tab.scale);
-                    renderPage(tab.pageNum);
-                }
-            } else {
-                btn.classList.remove('active-video');
-                if (tab) {
-                    tab.scale = 1.62; 
-                    updateZoomIndicator(tab.scale);
-                    renderPage(tab.pageNum);
-                }
-            }
-        }
-
-        let isNotepadOpen = false;
-        function toggleNotepadWindow() {
-            let panel = document.getElementById('sideNotepadPanel');
-            isNotepadOpen = !isNotepadOpen;
-            if (isNotepadOpen) {
-                panel.classList.add('active');
-                initNotepadCanvas();
-            } else {
-                panel.classList.remove('active');
-            }
-        }
-
-        let notepadCanvas, notepadCtx, notepadContainer;
-        function initNotepadCanvas() {
-            notepadCanvas = document.getElementById('notepadCanvas');
-            notepadContainer = document.getElementById('notepadScrollArea');
-            if(!notepadCanvas) return;
-            notepadCtx = notepadCanvas.getContext('2d');
-            
-            let dpr = window.devicePixelRatio || 1;
-            let displayWidth = notepadContainer.clientWidth - 5;
-            let displayHeight = 2000; 
-
-            notepadCanvas.width = displayWidth * dpr;
-            notepadCanvas.height = displayHeight * dpr;
-            notepadCanvas.style.width = displayWidth + 'px';
-            notepadCanvas.style.height = displayHeight + 'px';
-
-            notepadCtx.scale(dpr, dpr);
-        }
-
-        function changeNotepadBg(color) {
-            let area = document.getElementById('notepadScrollArea');
-            if(area) area.style.backgroundColor = color;
-        }
-
-        let isNotepadDrawing = false, notepadLastX = 0, notepadLastY = 0;
-
-        function getNotepadPos(e) {
-            const rect = notepadCanvas.getBoundingClientRect();
-            let clientX = e.clientX || (e.touches && e.touches.length > 0 ? e.touches[0].clientX : 0);
-            let clientY = e.clientY || (e.touches && e.touches.length > 0 ? e.touches[0].clientY : 0);
-            return {
-                x: clientX - rect.left,
-                y: clientY - rect.top
-            };
-        }
-
-        document.addEventListener('pointerdown', (e) => {
-            if (e.target.id === 'notepadCanvas') {
-                isNotepadDrawing = true;
-                let pos = getNotepadPos(e);
-                notepadLastX = pos.x;
-                notepadLastY = pos.y;
-                e.preventDefault();
-            }
-        });
-
-        document.addEventListener('pointermove', (e) => {
-            if (!isNotepadDrawing || !isNotepadOpen || !notepadCanvas) return;
-            let pos = getNotepadPos(e);
-
-            notepadCtx.strokeStyle = currentColor;
-            let pressure = (e.pressure && e.pressure > 0) ? e.pressure : 0.5;
-            notepadCtx.lineWidth = currentLineWidth * (e.pointerType === 'pen' ? (pressure * 1.5 + 0.5) : 1);
-            notepadCtx.lineJoin = 'round';
-            notepadCtx.lineCap = 'round';
-
-            notepadCtx.beginPath();
-            notepadCtx.moveTo(notepadLastX, notepadLastY);
-            notepadCtx.lineTo(pos.x, pos.y);
-            notepadCtx.stroke();
-
-            notepadLastX = pos.x;
-            notepadLastY = pos.y;
-            e.preventDefault();
-        });
-
-        document.addEventListener('pointerup', () => {
-            isNotepadDrawing = false;
-        });
-
-        function clearNotepadCanvas() {
-            if (notepadCtx && notepadCanvas) {
-                notepadCtx.clearRect(0, 0, notepadCanvas.width, notepadCanvas.height);
-            }
-        }
-
-        function openGoogleModal() {
-            let modal = document.getElementById('googleModalLayer');
-            let iframe = document.getElementById('googleIframe');
-            iframe.src = 'https://www.google.com/webhp?igu=1';
-            modal.classList.add('active');
-        }
-
-        function closeGoogleModal() {
-            let modal = document.getElementById('googleModalLayer');
-            let iframe = document.getElementById('googleIframe');
-            iframe.src = '';
-            modal.classList.remove('active');
-        }
-
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
-
-        let openTabs = []; 
-        let activeTabId = null;
-        let pdfCanvas = document.getElementById('pdfCanvas'), pdfCtx = pdfCanvas.getContext('2d'),
-            drawCanvas = document.getElementById('drawCanvas'), drawCtx = drawCanvas.getContext('2d');
-
-        let isDrawing = false, currentMode = 'pen', currentColor = '#0f172a', currentBgColor = '#ffffff', currentLineWidth = 2, highlighterOpacity = 0.35, lastX = 0, lastY = 0, startX = 0, startY = 0, snapshot = null;
-
-        function setTheme(themeName) {
-            document.documentElement.setAttribute('data-theme', themeName);
-            localStorage.setItem('english_spur_theme', themeName);
-        }
-
-        function changeColor(color, element) { currentColor = color; element.parentElement.querySelectorAll('.fixed-color-btn').forEach(b => b.classList.remove('selected')); element.classList.add('selected'); }
-        function changeBgColor(color, element) { currentBgColor = color; element.parentElement.querySelectorAll('.fixed-color-btn').forEach(b => b.classList.remove('selected')); element.classList.add('selected'); }
-        function changeSize(size) { currentLineWidth = parseInt(size); }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            let savedTheme = localStorage.getItem('english_spur_theme') || 'sea-green';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            document.getElementById('themeSelector').value = savedTheme;
-            document.getElementById('sizeSelector').value = "2";
-            document.getElementById('drawCanvas').classList.add('active');
-        });
-
-        function updateZoomIndicator(scale) {
-            let percent = Math.round((scale / 1.2) * 100);
-            let zoomInput = document.getElementById('zoomIndicatorInput');
-            if(zoomInput) zoomInput.value = percent + '%';
-        }
-
-        function jumpToZoom(val) {
-            let tab = getCurrentTab();
-            if (!tab) return;
-            let cleanVal = parseFloat(val.replace('%', '').trim());
-            if (!isNaN(cleanVal) && cleanVal > 0) {
-                saveCurrentPageData(tab);
-                tab.scale = (cleanVal / 100) * 1.2;
-                if (tab.scale < 0.5) tab.scale = 0.5;
-                if (tab.scale > 4.0) tab.scale = 4.0;
-                updateZoomIndicator(tab.scale);
-                renderPage(tab.pageNum);
-            } else {
-                updateZoomIndicator(tab.scale);
-            }
-        }
-
-        function fitToPage() {
-            let tab = getCurrentTab();
-            if (!tab) return;
-            saveCurrentPageData(tab);
-            let viewArea = document.getElementById('pdfViewArea');
-            let availWidth = viewArea.clientWidth - 50;
-            let availHeight = viewArea.clientHeight - 50;
-            
-            if (tab.type === 'image') {
-                let img = tab.imgElement;
-                let scaleX = availWidth / img.width;
-                let scaleY = availHeight / img.height;
-                tab.scale = Math.min(scaleX, scaleY);
-                updateZoomIndicator(tab.scale);
-                renderPage(tab.pageNum);
-            } else {
-                tab.pdfDoc.getPage(tab.pageNum).then(function(page) {
-                    let unscaledViewport = page.getViewport({ scale: 1.0 });
-                    let scaleX = availWidth / unscaledViewport.width;
-                    let scaleY = availHeight / unscaledViewport.height;
-                    tab.scale = Math.min(scaleX, scaleY);
-                    updateZoomIndicator(tab.scale);
-                    renderPage(tab.pageNum);
-                });
-            }
-        }
-
-        function fitToWidth() {
-            let tab = getCurrentTab();
-            if (!tab) return;
-            saveCurrentPageData(tab);
-            let viewArea = document.getElementById('pdfViewArea');
-            let availWidth = viewArea.clientWidth - 40;
-            
-            if (tab.type === 'image') {
-                let img = tab.imgElement;
-                tab.scale = availWidth / img.width;
-                updateZoomIndicator(tab.scale);
-                renderPage(tab.pageNum);
-            } else {
-                tab.pdfDoc.getPage(tab.pageNum).then(function(page) {
-                    let unscaledViewport = page.getViewport({ scale: 1.0 });
-                    tab.scale = availWidth / unscaledViewport.width;
-                    updateZoomIndicator(tab.scale);
-                    renderPage(tab.pageNum);
-                });
-            }
-        }
-
-        const pdfUploadInput = document.getElementById('pdfUpload');
-        pdfUploadInput.addEventListener('change', function(e) {
-            let files = Array.from(e.target.files).filter(file => file.type === 'application/pdf' || file.type.startsWith('image/'));
-            if (!files.length) return;
-
-            showConfirmDialog("ডকুমেন্ট/ইমেজ যুক্তকরণ", `${files.length} টি নতুন ফাইল ট্যাবে যুক্ত করতে চান?`, () => {
-                files.forEach(file => {
-                    let tabId = 'tab_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
-                    let isVideoOpen = document.getElementById('sideVideoPanel').classList.contains('active');
-                    let defaultScale = isVideoOpen ? 1.2 : 1.62; 
-                    if (file.type === 'application/pdf') {
-                        let fileReader = new FileReader();
-                        fileReader.onload = function() {
-                            let typedarray = new Uint8Array(this.result);
-                            pdfjsLib.getDocument(typedarray).promise.then(function(pdfDoc_) {
-                                let newTab = { id: tabId, type: 'pdf', name: file.name, pdfDoc: pdfDoc_, pageNum: 1, scale: defaultScale, drawingsVector: {}, textNotes: {}, historyStacks: {}, redoStacks: {} };
-                                openTabs.push(newTab);
-                                switchTab(tabId);
-                            });
-                        };
-                        fileReader.readAsArrayBuffer(file);
-                    } else if (file.type.startsWith('image/')) {
-                        let reader = new FileReader();
-                        reader.onload = function(event) {
-                            let imgObj = new Image();
-                            imgObj.onload = function() {
-                                let newTab = { id: tabId, type: 'image', name: file.name, imgElement: imgObj, pageNum: 1, scale: defaultScale, drawingsVector: {}, textNotes: {}, historyStacks: {}, redoStacks: {} };
-                                openTabs.push(newTab);
-                                switchTab(tabId);
-                            };
-                            imgObj.src = event.target.result;
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
-            });
-            pdfUploadInput.value = '';
-        });
-
-        function switchTab(tabId) {
-            let oldTab = getCurrentTab();
-            if (oldTab) saveCurrentPageData(oldTab);
-            activeTabId = tabId;
-            let currentTab = openTabs.find(t => t.id === tabId);
-            if (!currentTab) return;
-            renderTabsUI();
-            updateZoomIndicator(currentTab.scale);
-            renderPage(currentTab.pageNum);
-        }
-
-        function closeTab(tabId, event) {
-            if (event) event.stopPropagation();
-            let index = openTabs.findIndex(t => t.id === tabId);
-            if (index !== -1) openTabs.splice(index, 1);
-            if (openTabs.length > 0) {
-                switchTab(openTabs[openTabs.length - 1].id);
-            } else {
-                activeTabId = null;
-                document.getElementById('pdfTabBar').innerHTML = '';
-                pdfCtx.clearRect(0, 0, pdfCanvas.width, pdfCanvas.height);
-                drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-                document.getElementById('page_count').textContent = '1';
-                document.getElementById('pageJumpInput').value = '1';
-                document.getElementById('zoomIndicatorInput').value = '135%';
-                document.getElementById('canvasContainer').className = 'canvas-container';
-                document.querySelectorAll('.pdf-text-note').forEach(n => n.remove());
-            }
-        }
-
-        function renderTabsUI() {
-            let tabBar = document.getElementById('pdfTabBar');
-            tabBar.innerHTML = '';
-            openTabs.forEach(tab => {
-                let iconClass = tab.type === 'image' ? 'fa-file-image text-emerald-600' : 'fa-file-pdf text-red-500';
-                let tabEl = document.createElement('div');
-                tabEl.className = `pdf-tab ${tab.id === activeTabId ? 'active' : ''}`;
-                tabEl.innerHTML = `<i class="fas ${iconClass}" style="flex-shrink: 0;"></i> <span title="${tab.name}">${tab.name}</span> <i class="fas fa-times close-tab" onclick="closeTab('${tab.id}', event)" title="Close"></i>`;
-                tabEl.onclick = () => switchTab(tab.id);
-                tabBar.appendChild(tabEl);
-            });
-        }
-
-        function getCurrentTab() { return openTabs.find(t => t.id === activeTabId); }
-
-        function saveCurrentPageData(tab) {
-            if (!tab) return;
-            let notesData = [];
-            document.querySelectorAll('.pdf-text-note').forEach(note => {
-                let currentScale = tab.scale;
-                let absLeft = parseFloat(note.style.left) || note.offsetLeft;
-                let absTop = parseFloat(note.style.top) || note.offsetTop;
-                notesData.push({ text: note.value, pdfX: absLeft / currentScale, pdfY: absTop / currentScale, width: note.style.width, color: note.style.color, bg: note.style.backgroundColor });
-            });
-            tab.textNotes[tab.pageNum] = notesData;
-        }
-
-        function saveState() {
-            let tab = getCurrentTab();
-            if (!tab) return;
-            if (!tab.historyStacks[tab.pageNum]) tab.historyStacks[tab.pageNum] = [];
-            if (!tab.redoStacks[tab.pageNum]) tab.redoStacks[tab.pageNum] = [];
-            tab.historyStacks[tab.pageNum].push(JSON.parse(JSON.stringify(tab.drawingsVector[tab.pageNum] || [])));
-            tab.redoStacks[tab.pageNum] = [];
-        }
-
-        function undoCanvas() {
-            let tab = getCurrentTab();
-            if (!tab || !tab.historyStacks[tab.pageNum] || tab.historyStacks[tab.pageNum].length === 0) return;
-            if (!tab.redoStacks[tab.pageNum]) tab.redoStacks[tab.pageNum] = [];
-            tab.redoStacks[tab.pageNum].push(JSON.parse(JSON.stringify(tab.drawingsVector[tab.pageNum] || [])));
-            tab.drawingsVector[tab.pageNum] = tab.historyStacks[tab.pageNum].pop();
-            redrawVectorCanvas(tab);
-        }
-
-        function redoCanvas() {
-            let tab = getCurrentTab();
-            if (!tab || !tab.redoStacks[tab.pageNum] || tab.redoStacks[tab.pageNum].length === 0) return;
-            if (!tab.historyStacks[tab.pageNum]) tab.historyStacks[tab.pageNum] = [];
-            tab.historyStacks[tab.pageNum].push(JSON.parse(JSON.stringify(tab.drawingsVector[tab.pageNum] || [])));
-            tab.drawingsVector[tab.pageNum] = tab.redoStacks[tab.pageNum].pop();
-            redrawVectorCanvas(tab);
-        }
-
-        function redrawVectorCanvas(tab) {
-            drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-            let paths = tab.drawingsVector[tab.pageNum];
-            if (!paths || paths.length === 0) return;
-
-            let currentScale = tab.scale;
-
-            paths.forEach(cmd => {
-                drawCtx.save();
-                drawCtx.lineJoin = 'round';
-                drawCtx.lineCap = cmd.mode === 'highlighter' ? 'butt' : 'round';
-                drawCtx.miterLimit = 10;
-                drawCtx.lineWidth = cmd.width * currentScale;
-                drawCtx.strokeStyle = cmd.color;
-
-                if (cmd.mode === 'pen') {
-                    drawCtx.globalAlpha = 1.0;
-                    drawCtx.globalCompositeOperation = 'source-over';
-                    if (cmd.points && cmd.points.length >= 2) {
-                        drawCtx.beginPath();
-                        drawCtx.moveTo(cmd.points[0].x * currentScale, cmd.points[0].y * currentScale);
-                        for (let i = 1; i < cmd.points.length; i++) {
-                            let p = cmd.points[i];
-                            drawCtx.lineTo(p.x * currentScale, p.y * currentScale);
-                        }
-                        drawCtx.stroke();
-                    }
-                } else if (cmd.mode === 'highlighter') {
-                    drawCtx.globalAlpha = 0.35;
-                    drawCtx.globalCompositeOperation = 'multiply';
-                    drawCtx.beginPath();
-                    drawCtx.moveTo(cmd.startX * currentScale, cmd.startY * currentScale);
-                    drawCtx.lineTo(cmd.endX * currentScale, cmd.endY * currentScale);
-                    drawCtx.stroke();
-                } else if (cmd.mode === 'line') {
-                    drawCtx.globalAlpha = 1.0;
-                    drawCtx.globalCompositeOperation = 'source-over';
-                    drawCtx.beginPath();
-                    drawCtx.moveTo(cmd.startX * currentScale, cmd.startY * currentScale);
-                    drawCtx.lineTo(cmd.endX * currentScale, cmd.endY * currentScale);
-                    drawCtx.stroke();
-                } else if (cmd.mode === 'box') {
-                    drawCtx.globalAlpha = 1.0;
-                    drawCtx.globalCompositeOperation = 'source-over';
-                    drawCtx.strokeRect(cmd.startX * currentScale, cmd.startY * currentScale, (cmd.endX - cmd.startX) * currentScale, (cmd.endY - cmd.startY) * currentScale);
-                } else if (cmd.mode === 'circle') {
-                    drawCtx.globalAlpha = 1.0;
-                    drawCtx.globalCompositeOperation = 'source-over';
-                    let rx = Math.abs(cmd.endX - cmd.startX) / 2 * currentScale;
-                    let ry = Math.abs(cmd.endY - cmd.startY) / 2 * currentScale;
-                    let cx = (cmd.startX + (cmd.endX - cmd.startX) / 2) * currentScale;
-                    let cy = (cmd.startY + (cmd.endY - cmd.startY) / 2) * currentScale;
-                    drawCtx.beginPath();
-                    drawCtx.ellipse(cx, cy, rx, ry, 0, 0, 2 * Math.PI);
-                    drawCtx.stroke();
-                } else if (cmd.mode === 'arrow') {
-                    drawCtx.globalAlpha = 1.0;
-                    drawCtx.globalCompositeOperation = 'source-over';
-                    let sx = cmd.startX * currentScale, sy = cmd.startY * currentScale;
-                    let ex = cmd.endX * currentScale, ey = cmd.endY * currentScale;
-                    drawCtx.beginPath(); drawCtx.moveTo(sx, sy); drawCtx.lineTo(ex, ey); drawCtx.stroke();
-                    let angle = Math.atan2(ey - sy, ex - sx), headLen = (12 + cmd.width) * currentScale;
-                    drawCtx.beginPath();
-                    drawCtx.moveTo(ex, ey);
-                    drawCtx.lineTo(ex - headLen * Math.cos(angle - Math.PI / 6), ey - headLen * Math.sin(angle - Math.PI / 6));
-                    drawCtx.lineTo(ex - headLen * Math.cos(angle + Math.PI / 6), ey - headLen * Math.sin(angle + Math.PI / 6));
-                    drawCtx.lineTo(ex, ey);
-                    drawCtx.fillStyle = cmd.color; drawCtx.fill();
-                }
-                drawCtx.restore();
-            });
-        }
-
-        function renderPage(num) {
-            let tab = getCurrentTab();
-            if (!tab) return;
-            
-            document.getElementById('page_count').textContent = tab.type === 'image' ? '1' : tab.pdfDoc.numPages;
-            document.getElementById('pageJumpInput').value = num;
-
-            document.querySelectorAll('.pdf-text-note').forEach(n => n.remove());
-
-            let container = document.getElementById('canvasContainer');
-            container.className = 'canvas-container';
-
-            let outputScale = window.devicePixelRatio || 1;
-
-            if (tab.type === 'image') {
-                let img = tab.imgElement;
-                let vWidth = img.width * (tab.scale / 1.2);
-                let vHeight = img.height * (tab.scale / 1.2);
-
-                pdfCanvas.width = Math.floor(vWidth * outputScale);
-                pdfCanvas.height = Math.floor(vHeight * outputScale);
-                pdfCanvas.style.width = Math.floor(vWidth) + "px";
-                pdfCanvas.style.height = Math.floor(vHeight) + "px";
-
-                drawCanvas.width = pdfCanvas.width;
-                drawCanvas.height = pdfCanvas.height;
-                drawCanvas.style.width = pdfCanvas.style.width;
-                drawCanvas.style.height = pdfCanvas.style.height;
-
-                pdfCtx.save();
-                pdfCtx.scale(outputScale, outputScale);
-                pdfCtx.drawImage(img, 0, 0, vWidth, vHeight);
-                pdfCtx.restore();
-
-                redrawVectorCanvas(tab);
-                restoreNotesOnly(tab, num);
-            } else {
-                tab.pdfDoc.getPage(num).then(function(page) {
-                    let viewport = page.getViewport({ scale: tab.scale });
-
-                    pdfCanvas.width = Math.floor(viewport.width * outputScale);
-                    pdfCanvas.height = Math.floor(viewport.height * outputScale);
-                    pdfCanvas.style.width = Math.floor(viewport.width) + "px";
-                    pdfCanvas.style.height = Math.floor(viewport.height) + "px";
-
-                    drawCanvas.width = pdfCanvas.width;
-                    drawCanvas.height = pdfCanvas.height;
-                    drawCanvas.style.width = drawCanvas.style.width;
-                    drawCanvas.style.height = drawCanvas.style.height;
-
-                    let transform = outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null;
-
-                    let renderContext = {
-                        canvasContext: pdfCtx,
-                        viewport: viewport,
-                        transform: transform
-                    };
-
-                    page.render(renderContext).promise.then(() => {
-                        redrawVectorCanvas(tab);
-                        restoreNotesOnly(tab, num);
-                    });
-                });
-            }
-        }
-
-        function restoreNotesOnly(tab, num) {
-            if (tab.textNotes && tab.textNotes[num]) {
-                tab.textNotes[num].forEach(item => {
-                    let currentScale = tab.scale;
-                    let absoluteItem = {
-                        text: item.text,
-                        left: (item.pdfX !== undefined ? (item.pdfX * currentScale) : parseFloat(item.left)) + 'px',
-                        top: (item.pdfY !== undefined ? (item.pdfY * currentScale) : parseFloat(item.top)) + 'px',
-                        width: item.width || '120px',
-                        color: item.color,
-                        bg: item.bg
-                    };
-                    createNoteElement(tab, num, absoluteItem);
-                });
-            }
-        }
-
-        function prevPage() { 
-            let tab = getCurrentTab(); 
-            if (!tab || tab.type === 'image' || tab.pageNum <= 1) return; 
-            saveCurrentPageData(tab); tab.pageNum--; renderPage(tab.pageNum); 
-        }
-        function nextPage() { 
-            let tab = getCurrentTab(); 
-            if (!tab || tab.type === 'image' || tab.pageNum >= tab.pdfDoc.numPages) return; 
-            saveCurrentPageData(tab); tab.pageNum++; renderPage(tab.pageNum); 
-        }
-        function jumpToPage(val) {
-            let tab = getCurrentTab();
-            if (!tab || tab.type === 'image') return;
-            let num = parseInt(val);
-            if (num >= 1 && num <= tab.pdfDoc.numPages) { saveCurrentPageData(tab); tab.pageNum = num; renderPage(tab.pageNum); }
-            else { document.getElementById('pageJumpInput').value = tab.pageNum; }
-        }
-
-        function zoomIn() { 
-            let tab = getCurrentTab();
-            if (!tab) return;
-            if (tab.scale < 3.0) { 
-                saveCurrentPageData(tab);
-                tab.scale += 0.25; 
-                updateZoomIndicator(tab.scale);
-                renderPage(tab.pageNum); 
-            } 
-        }
-
-        function zoomOut() { 
-            let tab = getCurrentTab();
-            if (!tab) return;
-            if (tab.scale > 0.8) { 
-                saveCurrentPageData(tab);
-                tab.scale -= 0.25; 
-                updateZoomIndicator(tab.scale);
-                renderPage(tab.pageNum); 
-            } 
-        }
-
-        function setMode(mode) {
-            currentMode = mode;
-            ['mouseBtn', 'penBtn', 'highlighterBtn', 'lineBtn', 'boxBtn', 'circleBtn', 'arrowBtn', 'textToolBtn', 'eraserBtn'].forEach(id => {
-                let el = document.getElementById(id);
-                if(el) el.classList.remove('active');
-            });
-            let target = document.getElementById(mode + 'Btn');
-            if(target) target.classList.add('active');
-            if (mode === 'mouse') drawCanvas.classList.remove('active');
-            else drawCanvas.classList.add('active');
-        }
-
-        function clearCanvas() { 
-            let tab = getCurrentTab();
-            if (!tab) return;
-            saveState();
-            drawCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height); 
-            document.querySelectorAll('.pdf-text-note').forEach(n => n.remove());
-            tab.drawingsVector[tab.pageNum] = [];
-            tab.textNotes[tab.pageNum] = [];
-        }
-
-        function getCanvasPos(e) {
-            const rect = drawCanvas.getBoundingClientRect();
-            let clientX = e.clientX || (e.touches && e.touches.length > 0 ? e.touches[0].clientX : 0);
-            let clientY = e.clientY || (e.touches && e.touches.length > 0 ? e.touches[0].clientY : 0);
-            
-            let xView = (clientX - rect.left) * (drawCanvas.width / rect.width);
-            let yView = (clientY - rect.top) * (drawCanvas.height / rect.height);
-
-            return {
-                x: xView,
-                y: yView
-            };
-        }
-
-        function createNoteElement(tab, pageNum, item) {
-            let input = document.createElement('input');
-            input.type = 'text';
-            input.className = 'pdf-text-note';
-            input.style.left = item.left;
-            input.style.top = item.top;
-            input.style.width = item.width || '120px';
-            input.style.color = item.color;
-            input.style.backgroundColor = item.bg;
-            input.style.border = '1px solid var(--accent)';
-            input.value = item.text;
-
-            let currentScale = tab.scale;
-            let absLeft = parseFloat(item.left);
-            let absTop = parseFloat(item.top);
-            input.setAttribute('data-pdf-x', (absLeft / currentScale));
-            input.setAttribute('data-pdf-y', (absTop / currentScale));
-
-            document.getElementById('canvasContainer').appendChild(input);
-            input.addEventListener('input', function() { 
-                this.style.width = Math.max(120, this.value.length * 11 + 30) + 'px'; 
-                saveCurrentPageData(tab); 
-            });
-            input.addEventListener('blur', function() { saveCurrentPageData(tab); });
-            input.addEventListener('dblclick', function() { input.remove(); saveCurrentPageData(tab); });
-
-            let isDraggingNote = false, dX, dY;
-            input.addEventListener('mousedown', function(ev) { isDraggingNote = true; dX = ev.clientX - input.offsetLeft; dY = ev.clientY - input.offsetTop; ev.stopPropagation(); });
-            window.addEventListener('mousemove', function(ev) { 
-                if (isDraggingNote && input) { 
-                    input.style.left = (ev.clientX - dX) + 'px'; 
-                    input.style.top = (ev.clientY - dY) + 'px';
-                    input.setAttribute('data-pdf-x', (input.offsetLeft / currentScale));
-                    input.setAttribute('data-pdf-y', (input.offsetTop / currentScale));
-                } 
-            });
-            window.addEventListener('mouseup', function() { if (isDraggingNote) { isDraggingNote = false; saveCurrentPageData(tab); } });
-        }
-
-        drawCanvas.addEventListener('click', function(e) {
-            if (currentMode !== 'text') return;
-            if (document.activeElement && document.activeElement.classList.contains('pdf-text-note')) return;
-            let tab = getCurrentTab();
-            if (!tab) return;
-            const containerRect = document.getElementById('canvasContainer').getBoundingClientRect();
-            let rawX = (e.clientX - containerRect.left) * (drawCanvas.width / containerRect.width);
-            let rawY = (e.clientY - containerRect.top) * (drawCanvas.height / containerRect.height);
-            let currentScale = tab.scale;
-            let pdfX = rawX / (window.devicePixelRatio || 1) / currentScale;
-            let pdfY = rawY / (window.devicePixelRatio || 1) / currentScale;
-            let item = { text: '', left: (pdfX * currentScale) + 'px', top: (pdfY * currentScale) + 'px', width: '120px', color: currentColor, bg: currentBgColor };
-            createNoteElement(tab, tab.pageNum, item);
-            saveCurrentPageData(tab);
-        });
-
-        let points = [];
-        let currentCommand = null;
-
-        function startPosition(e) {
-            if (currentMode === 'mouse' || currentMode === 'text') return;
-            if (e.type.startsWith('touch') && e.cancelable) e.preventDefault();
-            
-            let pos = getCanvasPos(e);
-            let tab = getCurrentTab();
-            let currentScale = tab ? tab.scale : 1.2;
-            let baseEvX = pos.x / (window.devicePixelRatio || 1) / currentScale;
-            let baseEvY = pos.y / (window.devicePixelRatio || 1) / currentScale;
-
-            if (currentMode === 'eraser') {
-                saveState();
-                eraseAt(baseEvX, baseEvY, tab);
-                isDrawing = true;
-                return;
-            }
-
-            saveState();
-            isDrawing = true;
-
-            startX = pos.x; startY = pos.y; lastX = pos.x; lastY = pos.y;
-            points = [{ x: pos.x, y: pos.y }];
-
-            currentCommand = {
-                mode: currentMode,
-                color: currentColor,
-                width: currentLineWidth / currentScale,
-                points: [{ x: baseEvX, y: baseEvY }],
-                startX: baseEvX,
-                startY: baseEvY,
-                endX: baseEvX,
-                endY: baseEvY
-            };
-
-            if (['line', 'box', 'circle', 'arrow', 'highlighter'].includes(currentMode)) {
-                snapshot = drawCtx.getImageData(0, 0, drawCanvas.width, drawCanvas.height);
-            } else if (currentMode === 'pen') {
-                drawCtx.beginPath();
-                drawCtx.moveTo(lastX, lastY);
-            }
-        }
-
-        function endPosition(e) {
-            if (!isDrawing) return;
-            if (e.type.startsWith('touch') && e.cancelable) e.preventDefault();
-            isDrawing = false;
-
-            let tab = getCurrentTab();
-            if (tab && currentCommand) {
-                if (!tab.drawingsVector[tab.pageNum]) tab.drawingsVector[tab.pageNum] = [];
-                tab.drawingsVector[tab.pageNum].push(currentCommand);
-            }
-            currentCommand = null;
-            points = [];
-        }
-
-        function eraseAt(x, y, tab) {
-            if (!tab || !tab.drawingsVector[tab.pageNum]) return;
-            let paths = tab.drawingsVector[tab.pageNum];
-            let eraserRadius = Math.max(15, currentLineWidth * 4);
-            let initialLength = paths.length;
-
-            tab.drawingsVector[tab.pageNum] = paths.filter(cmd => {
-                if (cmd.mode === 'pen' && cmd.points) {
-                    let hit = cmd.points.some(p => Math.hypot(p.x - x, p.y - y) <= eraserRadius);
-                    return !hit;
-                } else if (['line', 'arrow', 'highlighter'].includes(cmd.mode)) {
-                    let A = x - cmd.startX;
-                    let B = y - cmd.startY;
-                    let C = cmd.endX - cmd.startX;
-                    let D = cmd.endY - cmd.startY;
-                    let dot = A * C + B * D;
-                    let lenSq = C * C + D * D;
-                    let param = lenSq !== 0 ? dot / lenSq : -1;
-                    let xx, yy;
-                    if (param < 0) { xx = cmd.startX; yy = cmd.startY; }
-                    else if (param > 1) { xx = cmd.endX; yy = cmd.endY; }
-                    else { xx = cmd.startX + param * C; yy = cmd.startY + param * D; }
-                    let dist = Math.hypot(x - xx, y - yy);
-                    return dist > eraserRadius;
-                } else if (['box', 'circle'].includes(cmd.mode)) {
-                    let minX = Math.min(cmd.startX, cmd.endX);
-                    let maxX = Math.max(cmd.startX, cmd.endX);
-                    let minY = Math.min(cmd.startY, cmd.endY);
-                    let maxY = Math.max(cmd.startY, cmd.endY);
-                    let hitInside = (x >= minX - eraserRadius && x <= maxX + eraserRadius && y >= minY - eraserRadius && y <= maxY + eraserRadius);
-                    return !hitInside;
-                }
-                return true;
-            });
-
-            if (tab.drawingsVector[tab.pageNum].length !== initialLength) {
-                redrawVectorCanvas(tab);
-            }
-        }
-
-        function draw(e) {
-            if (!isDrawing || currentMode === 'mouse' || currentMode === 'text') return;
-            if (e.type.startsWith('touch') && e.cancelable) e.preventDefault();
-            let pos = getCanvasPos(e);
-            let tab = getCurrentTab();
-            let currentScale = tab ? tab.scale : 1.2;
-
-            let baseEvX = pos.x / (window.devicePixelRatio || 1) / currentScale;
-            let baseEvY = pos.y / (window.devicePixelRatio || 1) / currentScale;
-
-            if (currentMode === 'eraser') {
-                eraseAt(baseEvX, baseEvY, tab);
-                return;
-            }
-
-            if (currentCommand) {
-                currentCommand.endX = baseEvX;
-                currentCommand.endY = baseEvY;
-            }
-
-            drawCtx.lineJoin = 'round';
-            drawCtx.lineCap = currentMode === 'highlighter' ? 'butt' : 'round';
-            drawCtx.miterLimit = 10;
-
-            if (currentMode === 'pen') {
-                points.push({ x: pos.x, y: pos.y });
-                if (currentCommand && currentCommand.points) {
-                    currentCommand.points.push({ x: baseEvX, y: baseEvY });
-                }
-
-                drawCtx.lineWidth = currentLineWidth * (window.devicePixelRatio || 1);
-                drawCtx.strokeStyle = currentColor;
-                drawCtx.globalAlpha = 1.0;
-                drawCtx.globalCompositeOperation = 'source-over';
-
-                if (points.length >= 2) {
-                    let p1 = points[points.length - 2];
-                    let p2 = points[points.length - 1];
-                    let xc = (p1.x + p2.x) / 2;
-                    let yc = (p1.y + p2.y) / 2;
-
-                    drawCtx.beginPath();
-                    drawCtx.moveTo(lastX, lastY);
-                    drawCtx.quadraticCurveTo(p1.x, p1.y, xc, yc);
-                    drawCtx.stroke();
-
-                    lastX = xc;
-                    lastY = yc;
-                }
-            } else if (currentMode === 'highlighter') {
-                drawCtx.putImageData(snapshot, 0, 0);
-                drawCtx.lineWidth = Math.max(12, currentLineWidth * 3.5);
-                drawCtx.strokeStyle = currentColor;
-                drawCtx.globalAlpha = highlighterOpacity;
-                drawCtx.globalCompositeOperation = 'multiply';
-                drawCtx.beginPath(); drawCtx.moveTo(startX, startY); drawCtx.lineTo(pos.x, pos.y); drawCtx.stroke();
-            } else if (currentMode === 'line') {
-                drawCtx.putImageData(snapshot, 0, 0);
-                drawCtx.lineWidth = currentLineWidth; drawCtx.strokeStyle = currentColor; drawCtx.globalAlpha = 1.0; drawCtx.globalCompositeOperation = 'source-over';
-                drawCtx.beginPath(); drawCtx.moveTo(startX, startY); drawCtx.lineTo(pos.x, pos.y); drawCtx.stroke();
-            } else if (currentMode === 'box') {
-                drawCtx.putImageData(snapshot, 0, 0);
-                drawCtx.lineWidth = currentLineWidth; drawCtx.strokeStyle = currentColor; drawCtx.globalAlpha = 1.0; drawCtx.globalCompositeOperation = 'source-over';
-                drawCtx.strokeRect(startX, startY, pos.x - startX, pos.y - startY);
-            } else if (currentMode === 'circle') {
-                drawCtx.putImageData(snapshot, 0, 0);
-                drawCtx.lineWidth = currentLineWidth; drawCtx.strokeStyle = currentColor; drawCtx.globalAlpha = 1.0; drawCtx.globalCompositeOperation = 'source-over';
-                let radiusX = Math.abs(pos.x - startX) / 2, radiusY = Math.abs(pos.y - startY) / 2;
-                let centerX = startX + (pos.x - startX) / 2, centerY = startY + (pos.y - startY) / 2;
-                drawCtx.beginPath(); drawCtx.ellipse(centerX, centerY, radiusX, radiusY, 0, 0, 2 * Math.PI); drawCtx.stroke();
-            } else if (currentMode === 'arrow') {
-                drawCtx.putImageData(snapshot, 0, 0);
-                drawCtx.lineWidth = currentLineWidth; drawCtx.strokeStyle = currentColor; drawCtx.globalAlpha = 1.0; drawCtx.globalCompositeOperation = 'source-over';
-                let sx = startX, sy = startY;
-                let ex = pos.x, ey = pos.y;
-                drawCtx.beginPath(); drawCtx.moveTo(sx, sy); drawCtx.lineTo(ex, ey); drawCtx.stroke();
-                let angle = Math.atan2(pos.y - startY, pos.x - startX), headLen = 12 + currentLineWidth;
-                drawCtx.beginPath();
-                drawCtx.moveTo(pos.x, pos.y);
-                drawCtx.lineTo(pos.x - headLen * Math.cos(angle - Math.PI / 6), pos.y - headLen * Math.sin(angle - Math.PI / 6));
-                drawCtx.lineTo(pos.x - headLen * Math.cos(angle + Math.PI / 6), pos.y - headLen * Math.sin(angle + Math.PI / 6));
-                drawCtx.lineTo(pos.x, pos.y);
-                drawCtx.fillStyle = currentColor; drawCtx.fill();
-            }
-        }
-
-        drawCanvas.addEventListener('mousedown', startPosition);
-        drawCanvas.addEventListener('mouseup', endPosition);
-        drawCanvas.addEventListener('mousemove', draw);
-        drawCanvas.addEventListener('touchstart', startPosition, { passive: false });
-        drawCanvas.addEventListener('touchend', endPosition, { passive: false });
-        drawCanvas.addEventListener('touchmove', draw, { passive: false });
-
-        /* গ্লোবাল কিবোর্ড শর্টকাট লিসেনার */
-        window.addEventListener('keydown', (e) => {
-            if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
-
-            let key = e.key.toLowerCase();
-
-            if (e.ctrlKey && key === 'o') {
-                e.preventDefault();
-                document.getElementById('pdfUpload').click();
-            } else if (e.ctrlKey && key === 'z') {
-                e.preventDefault();
-                undoCanvas();
-            } else if (e.ctrlKey && key === 'y') {
-                e.preventDefault();
-                redoCanvas();
-            } else if (e.ctrlKey && (e.key === '+' || e.key === '=')) {
-                e.preventDefault();
-                zoomIn();
-            } else if (e.ctrlKey && e.key === '-') {
-                e.preventDefault();
-                zoomOut();
-            } else if (key === 'p') {
-                setMode('pen');
-            } else if (key === 'b') {
-                setMode('box');
-            } else if (key === 'l') {
-                setMode('line');
-            } else if (key === 'e') {
-                setMode('eraser');
-            } else if (key === 'h') {
-                setMode('highlighter');
-            } else if (key === 'c') {
-                setMode('circle');
-            } else if (key === 'a') {
-                setMode('arrow');
-            } else if (key === 'm') {
-                setMode('mouse');
-            } else if (key === 't') {
-                setMode('text');
-            } else if (key === 'f') {
-                fitToPage();
-            } else if (key === 'w') {
-                fitToWidth();
-            } else if (key === 'v') {
-                toggleVideoWindow();
-            } else if (key === 'n') {
-                toggleNotepadWindow();
-            } else if (key === 'r') {
-                refreshSystemState();
-            } else if (key === 'g') {
-                openGoogleModal();
-            } else if (e.key === 'Delete') {
-                clearCanvas();
-            } else if (e.key === 'ArrowLeft') {
-                prevPage();
-            } else if (e.key === 'ArrowRight') {
-                nextPage();
-            } else if (e.code === 'Space') {
-                e.preventDefault();
-                togglePlayAudio();
-            }
-        });
-
-        let playlistData = [];
-        let currentTrackIndex = 0;
-        const audioElement = document.getElementById('audio-element');
-        const audioFileInput = document.getElementById('audio-file-input');
-        const audioTrackSelect = document.getElementById('audioTrackSelect');
-        const toolbarPlayBtn = document.getElementById('toolbarPlayBtn');
-        const playIcon = document.getElementById('playIcon');
-
-        audioFileInput.addEventListener('change', (e) => {
-            let files = Array.from(e.target.files).filter(file => file.type.includes('audio') || file.name.match(/\.(mp3|wav|aac|ogg|flac|m4a|wma|opus)$/i));
-            if (!files.length) return;
-
-            showConfirmDialog("অডিও ফাইল যুক্তকরণ", `${files.length} টি নতুন অডিও ফাইল লিস্টে যুক্ত করতে চান?`, () => {
-                let newTracks = files.map((file, index) => ({ id: playlistData.length + index + 1, title: file.name, src: URL.createObjectURL(file) }));
-                playlistData = playlistData.concat(newTracks);
-                updateAudioSelectUI();
-                if (playlistData.length > 0 && audioTrackSelect.value === "") {
-                    audioTrackSelect.value = 0;
-                    currentTrackIndex = 0;
-                    audioElement.src = playlistData[0].src;
-                    audioElement.pause();
-                    playIcon.className = "fas fa-play";
-                }
-            });
-            audioFileInput.value = '';
-        });
-
-        function updateAudioSelectUI() {
-            audioTrackSelect.innerHTML = '<option value="">Audio...</option>';
-            playlistData.forEach((track, index) => {
-                let opt = document.createElement('option');
-                opt.value = index;
-                opt.textContent = track.title;
-                audioTrackSelect.appendChild(opt);
-            });
-            if(playlistData[currentTrackIndex]) {
-                audioTrackSelect.value = currentTrackIndex;
-            }
-        }
-
-        function selectAudioTrack(index) {
-            if (index === "") return;
-            currentTrackIndex = parseInt(index);
-            let track = playlistData[currentTrackIndex];
-            if(track) {
-                audioElement.src = track.src;
-                audioElement.pause();
-                playIcon.className = "fas fa-play";
-            }
-        }
-
-        function removeAudioTrack(indexStr) {
-            if (indexStr === "" || playlistData.length === 0) return;
-            let idx = parseInt(indexStr);
-            playlistData.splice(idx, 1);
-            audioElement.pause();
-            audioElement.src = "";
-            playIcon.className = "fas fa-play";
-            currentTrackIndex = 0;
-            updateAudioSelectUI();
-            if(playlistData.length > 0) {
-                audioTrackSelect.value = 0;
-                selectAudioTrack(0);
-            }
-        }
-
-        function togglePlayAudio() {
-            if (playlistData.length === 0) { alert('প্রথমে অডিও ফাইল সিলেক্ট করুন!'); return; }
-            if (audioElement.paused) {
-                audioElement.play();
-                playIcon.className = "fas fa-pause";
-            } else {
-                audioElement.pause();
-                playIcon.className = "fas fa-play";
-            }
-        }
-
-        function stopAudio() {
-            audioElement.pause();
-            audioElement.currentTime = 0;
-            playIcon.className = "fas fa-play";
-        }
-
-        let videoPlaylistData = [];
-        let currentVideoIndex = 0;
-        const videoElement = document.getElementById('video-element');
-        const videoFolderInput = document.getElementById('video-folder-input');
-        const videoFileInput = document.getElementById('video-file-input');
-
-        videoFolderInput.addEventListener('change', (e) => handleVideoFilesInput(e.target.files));
-        videoFileInput.addEventListener('change', (e) => handleVideoFilesInput(e.target.files));
-
-        function handleVideoFilesInput(filesList) {
-            let files = Array.from(filesList).filter(file => file.type.includes('video') || file.name.match(/\.(mp4|mov|wmv|avi|mkv|webm|m4v|3gp|flv)$/i));
-            if (!files.length) return;
-
-            showConfirmDialog("ভিডিও ফাইল যুক্তকরণ", `${files.length} টি নতুন ভিডিও প্লেলিস্টে যুক্ত করতে চান?`, () => {
-                files.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
-                let newVideos = files.map((file, index) => ({ id: videoPlaylistData.length + index + 1, title: file.name, src: URL.createObjectURL(file), page: videoPlaylistData.length + index + 1 }));
-                videoPlaylistData = videoPlaylistData.concat(newVideos);
-                document.getElementById('video-folder-status').textContent = `${videoPlaylistData.length} টি ভিডিও স্টোর করা হয়েছে!`;
-                initVideoPlaylist();
-            });
-            videoFolderInput.value = '';
-            videoFileInput.value = '';
-        }
-
-        function initVideoPlaylist() {
-            let videoPlaylistContainer = document.getElementById('video-playlist');
-            videoPlaylistContainer.innerHTML = '';
-            videoPlaylistData.forEach((video, index) => {
-                let item = document.createElement('div');
-                item.className = `playlist-item ${index === currentVideoIndex ? 'active' : ''}`;
-                item.innerHTML = `<span>🎬 ${video.title}</span> <div class="playlist-item-actions"><span class="page-tag">P. ${video.page}</span><button class="playlist-delete-btn" onclick="removeVideoTrack(${index}, event)" title="Remove Video"><i class="fas fa-trash"></i></button></div>`;
-                item.onclick = (e) => { if(!e.target.closest('.playlist-delete-btn')) loadVideo(index); };
-                videoPlaylistContainer.appendChild(item);
-            });
-            if (videoPlaylistData.length > 0 && videoElement.src === "" && videoPlaylistData[0]) loadVideo(0);
-            if (videoPlaylistData.length === 0) {
-                videoElement.src = "";
-                document.getElementById('current-video-title').textContent = "Select a video";
-                document.getElementById('video-folder-status').textContent = "কোনো ভিডিও সিলেক্ট করা হয়নি";
-            }
-        }
-
-        function removeVideoTrack(index, event) {
-            if(event) event.stopPropagation();
-            videoPlaylistData.splice(index, 1);
-            if (currentVideoIndex >= index && currentVideoIndex > 0) {
-                currentVideoIndex--;
-            }
-            initVideoPlaylist();
-            if (videoPlaylistData.length > 0) {
-                loadVideo(currentVideoIndex);
-            } else {
-                videoElement.pause();
-                videoElement.src = "";
-                document.getElementById('current-video-title').textContent = "Select a video";
-            }
-        }
-
-        function loadVideo(index) {
-            if(!videoPlaylistData[index]) return;
-            currentVideoIndex = index;
-            let video = videoPlaylistData[index];
-            videoElement.src = video.src;
-            videoElement.load();
-            videoElement.pause();
-            document.getElementById('current-video-title').textContent = video.title;
-            highlightActiveVideoItem();
-        }
-
-        function highlightActiveVideoItem() {
-            let items = document.querySelectorAll('#video-playlist .playlist-item');
-            items.forEach((item, index) => {
-                if (index === currentVideoIndex) {
-                    item.classList.add('active');
-                    item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-        }
-    </script>
 </body>
 </html>
